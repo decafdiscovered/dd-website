@@ -1,0 +1,19 @@
+---
+import { SITE } from '@utils/site';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<aside
+  role="note"
+  aria-label="Affiliate disclosure"
+  class:list={[
+    'rounded-lg border border-[color:var(--color-mocha-100)] bg-[color:var(--color-cream-50)] text-[color:var(--color-mocha-700)]',
+    compact ? 'text-xs px-3 py-2' : 'text-sm px-4 py-3',
+  ]}
+>
+  <span aria-hidden="true" class="mr-1">☕</span>{SITE.affiliateDisclosure}
+</aside>

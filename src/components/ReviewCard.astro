@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets';
+import TasteTag from './TasteTag.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  review: CollectionEntry<'reviews'>;
+}
+const { review } = Astro.props;
+const { data, id } = review;
+const href = `/reviews/${id}/`;
+
+// Derive up to 4 human-friendly taste tags to display on the card.
+const visibleTags = data.tags.slice(0, 4);
+---
+
+<article
+  class="group flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white shadow-[var(--shadow-card)] transition-transform hover:-translate-y-0.5"
+  data-review-card
+  data-methods={JSON.stringify([data.decaffeinationMethod])}
+  data-tags={JSON.stringify(data.tags.map((t) => t.toLowerCase()))}
+  data-best-for={JSON.stringify(data.bestFor.map((b) => b.toLowerCase()))}
+  data-rating={data.ratings.overallScore.toString()}
+>
+  <a href={href} class="block aspect-[4/3] overflow-hidden bg-[color:var(--color-cream-100)] no-underline" aria-hidden="true" tabindex="-1">
+    {
+      data.image ? (
+        <Image
+          src={data.image}
+          alt={data.imageAlt ?? ''}
+          widths={[320, 480, 640]}
+          sizes="(min-width: 768px) 33vw, 100vw"
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        />
+      ) : (
+        <div class="flex h-full w-full items-center justify-center text-5xl text-[color:var(--color-mocha-300)]">
+          ☕
+        </div>
+      )
+    }
+  </a>
+
+  <div class="flex flex-1 flex-col gap-4 p-5">
+    <div>
+      <p class="text-xs uppercase tracking-wider font-semibold text-[color:var(--color-mocha-500)]">{data.roaster}</p>
+      <h3 class="mt-1 text-lg font-semibold">
+        <a href={href} class="no-underline">{data.coffeeName}</a>
+      </h3>
+    </div>
+
+    <div class="flex items-center gap-2 text-sm">
+      <span class="inline-flex items-center rounded-full bg-[color:var(--color-mocha-700)] text-[color:var(--color-cream-50)] px-2.5 py-0.5 text-xs font-semibold tabular-nums">
+        {data.ratings.overallScore.toFixed(1)} / 10
+      </span>
+      <span class="text-[color:var(--color-mocha-700)]">{data.country}</span>
+    </div>
+
+    {visibleTags.length > 0 && (
+      <ul class="flex flex-wrap gap-1.5" aria-label="Taste tags">
+        {visibleTags.map((tag) => (
+          <li><TasteTag label={tag} /></li>
+        ))}
+      </ul>
+    )}
+
+    <p class="text-sm text-[color:var(--color-mocha-700)] line-clamp-3">{data.summary}</p>
+
+    <div class="mt-auto flex flex-wrap gap-2 pt-2">
+      <a href={href} class="btn btn-primary text-sm no-underline">Read review</a>
+      {data.purchaseUrl && (
+        <a
+          href={data.purchaseUrl}
+          class="btn btn-secondary text-sm no-underline"
+          rel="sponsored noopener nofollow"
+          target="_blank"
+        >
+          Buy coffee <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      )}
+    </div>
+  </div>
+</article>

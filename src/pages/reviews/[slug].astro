@@ -1,0 +1,229 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RatingBar from '@components/RatingBar.astro';
+import TasteTag from '@components/TasteTag.astro';
+import AffiliateDisclosure from '@components/AffiliateDisclosure.astro';
+import NewsletterSignup from '@components/NewsletterSignup.astro';
+import { SITE, formatDate, formatPrice } from '@utils/site';
+
+export async function getStaticPaths() {
+  const reviews = await getCollection('reviews', ({ data }) => !data.draft);
+  return reviews.map((review) => ({ params: { slug: review.id }, props: { review } }));
+}
+
+const { review } = Astro.props;
+const { Content } = await render(review);
+const { data } = review;
+
+const price = formatPrice(data.price);
+const canonical = `/reviews/${review.id}/`;
+
+// JSON-LD Product + Review — helps search engines understand the page.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  itemReviewed: {
+    '@type': 'Product',
+    name: data.coffeeName,
+    brand: { '@type': 'Brand', name: data.roaster },
+    category: 'Coffee',
+    ...(data.image && Astro.site
+      ? { image: new URL(typeof data.image === 'string' ? data.image : data.image.src, Astro.site).toString() }
+      : {}),
+    ...(data.purchaseUrl
+      ? {
+          offers: {
+            '@type': 'Offer',
+            url: data.purchaseUrl,
+            priceCurrency: 'GBP',
+            ...(data.price !== undefined ? { price: data.price } : {}),
+            availability: 'https://schema.org/InStock',
+          },
+        }
+      : {}),
+  },
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: data.ratings.overallScore,
+    bestRating: 10,
+    worstRating: 1,
+  },
+  author: { '@type': 'Person', name: SITE.name },
+  datePublished: data.publishedDate.toISOString(),
+  reviewBody: data.summary,
+};
+---
+
+<BaseLayout
+  title={`${data.coffeeName} — ${data.roaster}`}
+  description={data.summary}
+  type="article"
+  publishedDate={data.publishedDate}
+  canonical={canonical}
+  structuredData={structuredData}
+>
+  <article class="container-page py-12" data-pagefind-body>
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6 text-sm text-[color:var(--color-mocha-700)]">
+      <a href="/reviews" class="no-underline">← Back to reviews</a>
+    </nav>
+
+    <div class="grid gap-10 lg:grid-cols-[2fr_1fr]">
+      <!-- Left column: write-up -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--color-mocha-500)]">{data.roaster}</p>
+        <h1 class="mt-2 text-4xl md:text-5xl font-bold">{data.coffeeName}</h1>
+        <p class="mt-3 text-sm text-[color:var(--color-mocha-700)]">
+          {formatDate(data.publishedDate)} · {data.country}{data.origin ? ` · ${data.origin}` : ''}
+        </p>
+
+        {data.isSampleContent && (
+          <p class="mt-4 inline-block rounded-full bg-[color:var(--color-cream-200)] px-3 py-1 text-xs font-medium text-[color:var(--color-mocha-700)]">
+            Sample content — for demonstration only.
+          </p>
+        )}
+
+        {data.image && (
+          <div class="mt-8 overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)]">
+            <Image
+              src={data.image}
+              alt={data.imageAlt ?? `${data.coffeeName} bag`}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 1024px) 720px, 100vw"
+              class="h-auto w-full"
+            />
+          </div>
+        )}
+
+        <p class="mt-8 text-lg text-[color:var(--color-mocha-700)]">{data.summary}</p>
+
+        <section class="mt-10 prose-decaf">
+          <h2>My experience</h2>
+          <p>{data.myExperience}</p>
+          <Content />
+        </section>
+
+        <section class="mt-10 grid gap-6 md:grid-cols-2">
+          <div class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-5">
+            <h3 class="text-lg font-semibold">What I liked</h3>
+            <ul class="mt-3 list-disc pl-5 text-sm text-[color:var(--color-mocha-700)] space-y-1">
+              {data.pros.map((p) => <li>{p}</li>)}
+            </ul>
+          </div>
+          <div class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-5">
+            <h3 class="text-lg font-semibold">What I didn't</h3>
+            <ul class="mt-3 list-disc pl-5 text-sm text-[color:var(--color-mocha-700)] space-y-1">
+              {data.cons.map((c) => <li>{c}</li>)}
+            </ul>
+          </div>
+        </section>
+
+        <section class="mt-10 grid gap-6 md:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-semibold">Who would like this</h3>
+            <p class="mt-2 text-[color:var(--color-mocha-700)]">{data.whoWouldLikeThis}</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">Who might not</h3>
+            <p class="mt-2 text-[color:var(--color-mocha-700)]">{data.whoMightNotLikeThis}</p>
+          </div>
+        </section>
+
+        <section class="mt-10">
+          <h3 class="text-lg font-semibold">Best brewing method</h3>
+          <p class="mt-2 text-[color:var(--color-mocha-700)]">{data.bestBrewingMethod}</p>
+        </section>
+      </div>
+
+      <!-- Right column: sidebar -->
+      <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-5 shadow-[var(--shadow-card)]">
+          <div class="flex items-center justify-between">
+            <span class="text-xs uppercase tracking-wider text-[color:var(--color-mocha-500)]">Overall</span>
+            <span class="rounded-full bg-[color:var(--color-mocha-700)] px-3 py-1 text-sm font-bold text-[color:var(--color-cream-50)] tabular-nums">
+              {data.ratings.overallScore.toFixed(1)} / 10
+            </span>
+          </div>
+
+          <div class="mt-5 space-y-4">
+            {data.ratings.espressoScore !== undefined && (
+              <RatingBar label="As espresso" score={data.ratings.espressoScore} />
+            )}
+            {data.ratings.milkDrinksScore !== undefined && (
+              <RatingBar label="With milk" score={data.ratings.milkDrinksScore} />
+            )}
+            {data.ratings.valueScore !== undefined && (
+              <RatingBar label="Value" score={data.ratings.valueScore} />
+            )}
+          </div>
+
+          <p class="mt-5 text-sm">
+            <strong>Would I buy again?</strong>{' '}
+            <span class:list={[data.ratings.wouldBuyAgain ? 'text-[color:var(--color-leaf)]' : 'text-[color:var(--color-mocha-700)]']}>
+              {data.ratings.wouldBuyAgain ? 'Yes — happily.' : 'Probably not.'}
+            </span>
+          </p>
+
+          {data.purchaseUrl && (
+            <a
+              href={data.purchaseUrl}
+              class="btn btn-primary mt-5 w-full no-underline"
+              rel="sponsored noopener nofollow"
+              target="_blank"
+            >
+              Buy this coffee <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+        </div>
+
+        <div class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-100)] p-5">
+          <h3 class="text-sm font-semibold text-[color:var(--color-espresso)]">The details</h3>
+          <dl class="mt-3 grid grid-cols-2 gap-y-2 text-sm">
+            <dt class="text-[color:var(--color-mocha-500)]">Decaf method</dt>
+            <dd class="text-right">{data.decaffeinationMethod}</dd>
+            <dt class="text-[color:var(--color-mocha-500)]">Roast</dt>
+            <dd class="text-right">{data.roastLevel}</dd>
+            {data.weight && (<><dt class="text-[color:var(--color-mocha-500)]">Bag</dt><dd class="text-right">{data.weight}g</dd></>)}
+            {price && (<><dt class="text-[color:var(--color-mocha-500)]">Price</dt><dd class="text-right">{price}</dd></>)}
+          </dl>
+        </div>
+
+        <div class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-5">
+          <h3 class="text-sm font-semibold text-[color:var(--color-espresso)]">Taste, in normal words</h3>
+          <dl class="mt-3 space-y-2 text-sm">
+            <div><dt class="font-medium">Sweetness</dt><dd class="text-[color:var(--color-mocha-700)]">{data.taste.sweetness}</dd></div>
+            <div><dt class="font-medium">Bitterness</dt><dd class="text-[color:var(--color-mocha-700)]">{data.taste.bitterness}</dd></div>
+            <div><dt class="font-medium">Acidity</dt><dd class="text-[color:var(--color-mocha-700)]">{data.taste.acidity}</dd></div>
+            <div><dt class="font-medium">Body</dt><dd class="text-[color:var(--color-mocha-700)]">{data.taste.body}</dd></div>
+          </dl>
+
+          {data.tags.length > 0 && (
+            <>
+              <p class="mt-4 text-sm font-semibold">Tags</p>
+              <ul class="mt-2 flex flex-wrap gap-1.5">
+                {data.tags.map((t) => <li><TasteTag label={t} /></li>)}
+              </ul>
+            </>
+          )}
+
+          {data.bestFor.length > 0 && (
+            <>
+              <p class="mt-4 text-sm font-semibold">Best for</p>
+              <ul class="mt-2 flex flex-wrap gap-1.5">
+                {data.bestFor.map((b) => <li><TasteTag label={b} emphasis /></li>)}
+              </ul>
+            </>
+          )}
+        </div>
+
+        <AffiliateDisclosure compact />
+      </aside>
+    </div>
+
+    <div class="mt-16">
+      <NewsletterSignup />
+    </div>
+  </article>
+</BaseLayout>

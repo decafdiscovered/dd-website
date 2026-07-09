@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { formatDate } from '@utils/site';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', ({ data }) => !data.draft);
+  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.data.title,
+  description: guide.data.summary,
+  datePublished: guide.data.publishedDate.toISOString(),
+  author: { '@type': 'Organization', name: 'Decaf Discovered' },
+};
+---
+
+<BaseLayout
+  title={guide.data.title}
+  description={guide.data.summary}
+  type="article"
+  publishedDate={guide.data.publishedDate}
+  canonical={`/guides/${guide.id}/`}
+  structuredData={structuredData}
+>
+  <article class="container-page max-w-3xl py-12" data-pagefind-body>
+    <nav aria-label="Breadcrumb" class="mb-6 text-sm text-[color:var(--color-mocha-700)]">
+      <a href="/guides" class="no-underline">← Back to guides</a>
+    </nav>
+
+    <p class="text-xs font-semibold tracking-[0.2em] text-[color:var(--color-mocha-500)] uppercase">
+      Guide
+    </p>
+    <h1 class="mt-2 text-4xl font-bold md:text-5xl">{guide.data.title}</h1>
+    <p class="mt-3 text-sm text-[color:var(--color-mocha-700)]">
+      {formatDate(guide.data.publishedDate)}
+    </p>
+
+    <p class="mt-6 text-lg text-[color:var(--color-mocha-700)]">{guide.data.summary}</p>
+
+    {
+      guide.data.isSampleContent && (
+        <p class="mt-4 inline-block rounded-full bg-[color:var(--color-cream-200)] px-3 py-1 text-xs font-medium text-[color:var(--color-mocha-700)]">
+          Sample content — for demonstration only.
+        </p>
+      )
+    }
+
+    <div class="prose-decaf mt-8">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

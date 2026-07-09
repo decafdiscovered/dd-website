@@ -1,0 +1,132 @@
+# Decap CMS configuration (Git-backed, no server required).
+# When you're ready to enable editing:
+#   1. Set the correct `repo` and `branch` below.
+#   2. Choose a backend (github, gitlab, bitbucket or git-gateway).
+#   3. Follow https://decapcms.org/docs/ for auth setup.
+
+backend:
+  name: github
+  repo: your-github-user/decaf-discovered
+  branch: main
+
+media_folder: 'public/images/coffees'
+public_folder: '/images/coffees'
+
+site_url: https://decafdiscovered.example
+display_url: https://decafdiscovered.example
+locale: en
+
+collections:
+  - name: reviews
+    label: Reviews
+    folder: src/content/reviews
+    create: true
+    slug: '{{slug}}'
+    identifier_field: coffeeName
+    fields:
+      - { name: coffeeName, label: Coffee name, widget: string }
+      - { name: roaster, label: Roaster, widget: string }
+      - { name: country, label: Country, widget: string }
+      - { name: origin, label: Origin (region/farm), widget: string, required: false }
+      - {
+          name: decaffeinationMethod,
+          label: Decaffeination method,
+          widget: select,
+          options: ['Swiss Water', 'Sugar Cane / Ethyl Acetate', 'CO2', 'Unknown'],
+        }
+      - {
+          name: roastLevel,
+          label: Roast level,
+          widget: select,
+          options: ['Light', 'Medium-light', 'Medium', 'Medium-dark', 'Dark'],
+        }
+      - { name: price, label: Price (GBP), widget: number, required: false, value_type: float }
+      - { name: weight, label: Weight (grams), widget: number, required: false, value_type: int }
+      - { name: purchaseUrl, label: Purchase URL, widget: string, required: false }
+      - { name: image, label: Image, widget: image, required: false }
+      - { name: publishedDate, label: Published date, widget: datetime }
+      - { name: tags, label: Tags, widget: list, default: [] }
+      - {
+          name: bestFor,
+          label: Best for,
+          widget: select,
+          multiple: true,
+          options: ['Espresso', 'Flat white', 'Filter', 'Cafetière', 'AeroPress'],
+        }
+      - name: ratings
+        label: Ratings
+        widget: object
+        fields:
+          - {
+              name: overallScore,
+              label: Overall (1–10),
+              widget: number,
+              min: 1,
+              max: 10,
+              value_type: float,
+            }
+          - {
+              name: espressoScore,
+              label: Espresso (1–10),
+              widget: number,
+              min: 1,
+              max: 10,
+              value_type: float,
+            }
+          - {
+              name: milkDrinksScore,
+              label: Milk drinks (1–10),
+              widget: number,
+              min: 1,
+              max: 10,
+              value_type: float,
+            }
+          - {
+              name: valueScore,
+              label: Value (1–10),
+              widget: number,
+              min: 1,
+              max: 10,
+              value_type: float,
+            }
+          - { name: wouldBuyAgain, label: Would buy again?, widget: boolean, default: false }
+      - name: taste
+        label: Taste experience
+        widget: object
+        fields:
+          - { name: sweetness, label: Sweetness, widget: string }
+          - { name: bitterness, label: Bitterness, widget: string }
+          - { name: acidity, label: Acidity, widget: string }
+          - { name: body, label: Body, widget: string }
+      - { name: summary, label: Short summary, widget: text }
+      - { name: myExperience, label: My experience, widget: markdown }
+      - { name: bestBrewingMethod, label: Best brewing method, widget: string }
+      - { name: whoWouldLikeThis, label: Who would like this, widget: text }
+      - { name: whoMightNotLikeThis, label: Who might not like this, widget: text }
+      - { name: pros, label: Pros, widget: list, default: [] }
+      - { name: cons, label: Cons, widget: list, default: [] }
+      - { name: body, label: Full write-up, widget: markdown, required: false }
+
+  - name: roasters
+    label: Roasters
+    folder: src/content/roasters
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: location, label: Location, widget: string }
+      - { name: website, label: Website, widget: string, required: false }
+      - { name: summary, label: Summary, widget: text }
+      - { name: body, label: About, widget: markdown, required: false }
+
+  - name: guides
+    label: Guides
+    folder: src/content/guides
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: summary, label: Summary, widget: text }
+      - { name: publishedDate, label: Published date, widget: datetime }
+      - { name: tags, label: Tags, widget: list, default: [] }
+      - { name: body, label: Body, widget: markdown }

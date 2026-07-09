@@ -1,0 +1,116 @@
+---
+import { SITE } from '@utils/site';
+
+const nav = [
+  { href: '/reviews', label: 'Reviews' },
+  { href: '/roasters', label: 'Roasters' },
+  { href: '/guides', label: 'Guides' },
+  { href: '/setup', label: 'My setup' },
+  { href: '/newsletter', label: 'Newsletter' },
+  { href: '/about', label: 'About' },
+];
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-50)]/90 backdrop-blur"
+>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="container-page flex items-center justify-between gap-6 py-4">
+    <a href="/" class="flex items-center gap-2 no-underline">
+      <span
+        aria-hidden="true"
+        class="font-display grid inline-block h-9 w-9 place-items-center rounded-full bg-[color:var(--color-mocha-700)] text-lg text-[color:var(--color-cream-50)]"
+        >D</span
+      >
+      <span class="font-display text-xl font-bold text-[color:var(--color-espresso)]"
+        >{SITE.name}</span
+      >
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:block">
+      <ul class="flex items-center gap-6 text-sm font-medium">
+        {
+          nav.map((item) => {
+            const active = path === item.href || path.startsWith(item.href + '/');
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    'no-underline hover:text-[color:var(--color-espresso)]',
+                    active
+                      ? 'text-[color:var(--color-espresso)] underline decoration-[color:var(--color-crema)] decoration-2 underline-offset-8'
+                      : 'text-[color:var(--color-mocha-700)]',
+                  ]}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+        {
+          SITE.buyMeACoffeeUrl && (
+            <li>
+              <a
+                href={SITE.buyMeACoffeeUrl}
+                rel="noopener"
+                target="_blank"
+                class="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--color-mocha-700)] px-3.5 py-1.5 text-xs font-semibold text-[color:var(--color-cream-50)] no-underline hover:bg-[color:var(--color-espresso)]"
+              >
+                <span aria-hidden="true">☕</span>
+                <span>Buy me a coffee</span>
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+
+    <details class="relative md:hidden">
+      <summary
+        class="cursor-pointer list-none rounded-full border border-[color:var(--color-mocha-100)] px-3 py-1.5 text-sm font-medium"
+        aria-label="Toggle navigation menu"
+      >
+        Menu
+      </summary>
+      <nav
+        aria-label="Primary mobile"
+        class="absolute right-0 mt-2 w-56 rounded-xl border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-50)] p-3 shadow-lg"
+      >
+        <ul class="flex flex-col gap-2 text-sm">
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="block rounded-md px-2 py-2 no-underline hover:bg-[color:var(--color-cream-100)]"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          {
+            SITE.buyMeACoffeeUrl && (
+              <li class="mt-1 border-t border-[color:var(--color-cream-200)] pt-2">
+                <a
+                  href={SITE.buyMeACoffeeUrl}
+                  rel="noopener"
+                  target="_blank"
+                  class="flex items-center gap-2 rounded-md px-2 py-2 font-semibold text-[color:var(--color-mocha-700)] no-underline hover:bg-[color:var(--color-cream-100)]"
+                >
+                  <span aria-hidden="true">☕</span>
+                  <span>Buy me a coffee</span>
+                </a>
+              </li>
+            )
+          }
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>

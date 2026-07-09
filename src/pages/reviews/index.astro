@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import ReviewCard from '@components/ReviewCard.astro';
+import ReviewFilters from '@components/ReviewFilters.astro';
+import AffiliateDisclosure from '@components/AffiliateDisclosure.astro';
+
+const reviews = (await getCollection('reviews', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime(),
+);
+---
+
+<BaseLayout
+  title="Decaf reviews"
+  description="Every decaf coffee reviewed on Decaf Discovered. Filter by decaf method, flavour, best-for use and rating."
+>
+  <div class="container-page py-16">
+    <SectionHeading
+      eyebrow="The library"
+      title="Every decaf, reviewed"
+      description="Filter the list to find something you'll actually enjoy drinking."
+      as="h1"
+    />
+
+    <ReviewFilters />
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-pagefind-body>
+      {reviews.map((review) => <ReviewCard review={review} />)}
+    </div>
+
+    <div class="mt-16">
+      <AffiliateDisclosure />
+    </div>
+  </div>
+</BaseLayout>

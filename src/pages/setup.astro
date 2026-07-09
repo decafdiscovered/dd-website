@@ -1,0 +1,149 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import AffiliateDisclosure from '@components/AffiliateDisclosure.astro';
+
+// Edit the arrays below to update the page — no schema, no rebuild dance.
+// `url` is optional. If it's an Amazon affiliate link, set `affiliate: true`
+// and the correct rel attribute is added automatically.
+
+type GearItem = {
+  name: string;
+  model?: string;
+  note?: string;
+  url?: string;
+  affiliate?: boolean;
+};
+
+type GearSection = {
+  heading: string;
+  intro?: string;
+  items: GearItem[];
+};
+
+const sections: GearSection[] = [
+  {
+    heading: 'Espresso machine',
+    intro: 'The machine I actually pull shots on most mornings.',
+    items: [
+      {
+        name: 'Breville Barista Slimline',
+        model: 'Sunbeam EMM5400BK outside the UK',
+        note: 'Single-boiler, built-in grinder. Not fancy, but capable of properly good espresso once you learn its quirks.',
+        url: 'https://amzn.to/4pjRgVS',
+        affiliate: true,
+      },
+    ],
+  },
+  {
+    heading: 'Grinder',
+    items: [
+      {
+        name: 'To be purchased',
+        note: 'A dedicated grinder is on the wishlist.',
+      },
+    ],
+  },
+  {
+    heading: 'Measuring & workflow',
+    items: [
+      {
+        name: 'Scales',
+        note: 'Any small kitchen scales that read to 0.1 g are fine to start with.',
+      },
+      {
+        name: 'Timer',
+        note: 'Phone timer — no need for anything fancier.',
+      },
+    ],
+  },
+  {
+    heading: 'Cups & glassware',
+    intro:
+      'A trio of Acme Roman cups in Kokako — enough range to try latte, flat white and cortado on the same morning.',
+    items: [
+      {
+        name: 'Acme Roman Cup Mini — Kokako',
+        model: '110 ml',
+        note: 'Cortado-sized. Small enough to keep the milk-to-espresso ratio tight.',
+      },
+      {
+        name: 'Acme Roman Cup Small — Kokako',
+        model: '150 ml',
+        note: 'The flat white cup. My most-used of the three.',
+      },
+      {
+        name: 'Acme Roman Cup Medium — Kokako',
+        model: '250 ml',
+        note: 'Latte territory — a bit more room for milk and a proper pour.',
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="My setup"
+  description="The coffee machine, grinder and kit I use every day to brew and review decaf at home."
+>
+  <div class="container-page max-w-3xl py-16">
+    <SectionHeading
+      eyebrow="What I actually use"
+      title="My setup"
+      description="The machine, kit and small habits behind every review on this site. Nothing fancy — but enough to pull a genuinely good shot of decaf."
+      as="h1"
+    />
+
+    <div class="prose-decaf">
+      <p>
+        This page is a running list of what I've got in the kitchen. If you've read a review and
+        wondered "yeah, but on <em>what</em>?" — here's the answer. I'll update it whenever
+        something changes.
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-12">
+      {
+        sections.map((section) => (
+          <section>
+            <h2 class="text-2xl font-bold">{section.heading}</h2>
+            {section.intro && (
+              <p class="mt-2 text-[color:var(--color-mocha-700)]">{section.intro}</p>
+            )}
+
+            <ul class="mt-5 grid gap-4">
+              {section.items.map((item) => (
+                <li class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-6 shadow-[var(--shadow-card)]">
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 class="text-lg font-semibold">{item.name}</h3>
+                    {item.model && (
+                      <p class="text-sm text-[color:var(--color-mocha-500)]">{item.model}</p>
+                    )}
+                  </div>
+                  {item.note && (
+                    <p class="mt-2 text-sm text-[color:var(--color-mocha-700)]">{item.note}</p>
+                  )}
+                  {item.url && (
+                    <p class="mt-3 text-sm">
+                      <a
+                        href={item.url}
+                        rel={item.affiliate ? 'sponsored noopener' : 'noopener'}
+                        target="_blank"
+                      >
+                        {item.affiliate ? 'Buy on Amazon' : 'Product page'} →
+                      </a>
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="mt-16">
+      <AffiliateDisclosure />
+    </div>
+  </div>
+</BaseLayout>

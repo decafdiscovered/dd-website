@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Palette previews · Decaf Discovered</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 40px 24px 80px;
+        background: #f2efea;
+        color: #111;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+      .intro {
+        max-width: 720px;
+        margin: 0 0 32px;
+        color: #4a4a4a;
+      }
+      .grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .card {
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        background: #fff;
+      }
+      .demo {
+        padding: 22px 22px 26px;
+      }
+      .demo .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        opacity: 0.75;
+      }
+      .demo h2 {
+        margin: 6px 0 4px;
+        font-size: 22px;
+        line-height: 1.2;
+      }
+      .demo p {
+        margin: 0 0 14px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .btn {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .swatch {
+        padding: 12px 10px 10px;
+        font-size: 11px;
+        line-height: 1.35;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .label {
+        display: block;
+        font-family: system-ui, sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.8;
+        margin-bottom: 4px;
+      }
+      .meta {
+        padding: 12px 22px 18px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        font-size: 12px;
+        color: #555;
+      }
+      .meta strong {
+        color: #111;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Palette previews</h1>
+    <p class="intro">
+      Seven directions for Decaf Discovered. Each card mocks a hero + button + swatches so you can
+      judge the actual feel. Pick one (or mix) and I'll wire it into
+      <code>src/styles/global.css</code>.
+    </p>
+
+    <div class="grid">
+      <!-- 1. Warm cream (current) -->
+      <article class="card">
+        <div class="demo" style="background: #f7f1e8; color: #2a1e14">
+          <span class="eyebrow" style="color: #8b5e3c">Warm cream · current</span>
+          <h2>Finding great decaf, one bag at a time.</h2>
+          <p style="color: #5a4838">Honest reviews of decaf beans from a normal coffee drinker.</p>
+          <a class="btn" style="background: #8b5e3c; color: #f7f1e8" href="#">Read reviews</a>
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background: #f7f1e8; color: #2a1e14">
+            <span class="label">Base</span>#F7F1E8
+          </div>
+          <div class="swatch" style="background: #efe4d1; color: #2a1e14">
+            <span class="label">Surface</span>#EFE4D1
+          </div>
+          <div class="swatch" style="background: #8b5e3c; color: #f7f1e8">
+            <span class="label">Accent</span>#8B5E3C
+          </div>
+          <div class="swatch" style="background: #2a1e14; color: #f7f1e8">
+            <span class="label">Text</span>#2A1E14
+          </div>
+        </div>
+        <div class="meta"><strong>1. Warm cream</strong> — cosy café, printed zine.</div>
+      </article>
+
+      <!-- 2. Nordic decaf -->
+      <article class="card">
+        <div class="demo" style="background: #f5f5f1; color: #1e2a24">
+          <span class="eyebrow" style="color: #5b7a65">Nordic decaf</span>
+          <h2>Finding great decaf, one bag at a time.</h2>
+          <p style="color: #4a5a52">Honest reviews of decaf beans from a normal coffee drinker.</p>
+          <a class="btn" style="background: #5b7a65; color: #f5f5f1" href="#">Read reviews</a>
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background: #f5f5f1; color: #1e2a24">
+            <span class="label">Base</span>#F5F5F1
+          </div>
+          <div class="swatch" style="background: #e6e6df; color: #1e2a24">
+            <span class="label">Surface</span>#E6E6DF
+          </div>
+          <div class="swatch" style="background: #5b7a65; color: #f5f5f1">
+            <span class="label">Accent</span>#5B7A65
+          </div>
+          <div class="swatch" style="background: #1e2a24; color: #f5f5f1">
+            <span class="label">Text</span>#1E2A24
+          </div>
+        </div>
+        <div class="meta"><strong>2. Nordic decaf</strong> — Scandi-minimal, calm.</div>
+      </article>
+
+      <!-- 3. Evening / dark mode first -->
+      <article class="card">
+        <div class="demo" style="background: #151212; color: #ede6da">
+          <span class="eyebrow" style="color: #d6a26c">Evening</span>
+          <h2>Finding great decaf, one bag at a time.</h2>
+          <p style="color: #c3b9a8">Honest reviews of decaf beans from a normal coffee drinker.</p>
+          <a class="btn" style="background: #d6a26c; color: #151212" href="#">Read reviews</a>
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background: #151212; color: #ede6da">
+            <span class="label">Base</span>#151212
+          </div>
+          <div class="swatch" style="background: #23201d; color: #ede6da">
+            <span class="label">Surface</span>#23201D
+          </div>
+          <div class="swatch" style="background: #d6a26c; color: #151212">
+            <span class="label">Accent</span>#D6A26C
+          </div>
+          <div class="swatch" style="background: #ede6da; color: #151212">
+            <span class="label">Text</span>#EDE6DA
+          </div>
+        </div>
+        <div class="meta">
+          <strong>3. Evening / dark-first</strong> — late-night pour-over, moody.
+        </div>
+      </article>
+
+      <!-- 4. Terracotta & clay -->
+      <article class="card">
+        <div class="demo" style="background: #faf3e9; color: #3b241a">
+          <span class="eyebrow" style="color: #b85c3b">Terracotta &amp; clay</span>
+          <h2>Finding great decaf, one bag at a time.</h2>
+          <p style="color: #6b4a3a">Honest reviews of decaf beans from a normal coffee drinker.</p>
+          <a class="btn" style="background: #b85c3b; color: #faf3e9" href="#">Read reviews</a>
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background: #faf3e9; color: #3b241a">
+            <span class="label">Base</span>#FAF3E9
+          </div>
+          <div class="swatch" style="background: #f0e2d0; color: #3b241a">
+            <span class="label">Surface</span>#F0E2D0
+          </div>
+          <div class="swatch" style="background: #b85c3b; color: #faf3e9">
+            <span class="label">Accent</span>#B85C3B
+          </div>
+          <div class="swatch" style="background: #3b241a; color: #faf3e9">
+            <span class="label">Text</span>#3B241A
+          </div>
+        </div>
+        <div class="meta">
+          <strong>4. Terracotta &amp; clay</strong> — ceramic mugs, Mediterranean warmth.
+        </div>
+      </article>
+
+      <!-- 5. Botanical / matcha adjacent -->
+      <article class="card">
+        <div class="demo" style="background: #f4f6ee; color: #20261a">
+          <span class="eyebrow" style="color: #4f6d3a">Botanical</span>
+          <h2>Finding great decaf, one bag at a time.</h2>
+          <p style="color: #4c5442">Honest reviews of decaf beans from a normal coffee drinker.</p>
+          <a class="btn" style="background: #4f6d3a; color: #f4f6ee" href="#">Read reviews</a>
+          <a class="btn" style="background: #c8a265; color: #20261a; margin-left: 8px" href="#"
+            >Second accent</a
+          >
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background: #f4f6ee; color: #20261a">
+            <span class="label">Base</span>#F4F6EE
+          </div>
+          <div class="swatch" style="background: #4f6d3a; color: #f4f6ee">
+            <span class="label">Accent</span>#4F6D3A
+          </div>
+          <div class="swatch" style="background: #c8a265; color: #20261a">
+            <span class="label">Accent 2</span>#C8A265
+          </div>
+          <div class="swatch" style="background: #20261a; color: #f4f6ee">
+            <span class="label">Text</span>#20261A
+          </div>
+        </div>
+        <div class="meta"><strong>5. Botanical</strong> — health-forward, "gentle caffeine".</div>
+      </article>
+
+      <!-- 6. Editorial contrast -->
+      <article class="card">
+        <div class="demo" style="background: #ffffff; color: #111111">
+          <span class="eyebrow" style="color: #c24e2c">Editorial</span>
+          <h2>Finding great decaf, one bag at a time.</h2>
+          <p style="color: #4a4a4a">Honest reviews of decaf beans from a normal coffee drinker.</p>
+          <a class="btn" style="background: #111111; color: #ffffff" href="#">Read reviews</a>
+          <a
+            class="btn"
+            style="
+              background: transparent;
+              color: #c24e2c;
+              margin-left: 8px;
+              box-shadow: inset 0 0 0 1.5px #c24e2c;
+            "
+            href="#"
+            >Accent link</a
+          >
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background: #ffffff; color: #111111">
+            <span class="label">Base</span>#FFFFFF
+          </div>
+          <div class="swatch" style="background: #f2f0ec; color: #111111">
+            <span class="label">Surface</span>#F2F0EC
+          </div>
+          <div class="swatch" style="background: #c24e2c; color: #ffffff">
+            <span class="label">Accent</span>#C24E2C
+          </div>
+          <div class="swatch" style="background: #111111; color: #ffffff">
+            <span class="label">Text</span>#111111
+          </div>
+        </div>
+        <div class="meta">
+          <strong>6. Editorial contrast</strong> — NYT / magazine, single splash of colour.
+        </div>
+      </article>
+
+      <!-- 7. Blue-hour -->
+      <article class="card">
+        <div class="demo" style="background: #f2efea; color: #141b23">
+          <span class="eyebrow" style="color: #2e4661">Blue-hour</span>
+          <h2>Finding great decaf, one bag at a time.</h2>
+          <p style="color: #4a5766">Honest reviews of decaf beans from a normal coffee drinker.</p>
+          <a class="btn" style="background: #2e4661; color: #f2efea" href="#">Read reviews</a>
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background: #f2efea; color: #141b23">
+            <span class="label">Base</span>#F2EFEA
+          </div>
+          <div class="swatch" style="background: #e2ddd4; color: #141b23">
+            <span class="label">Surface</span>#E2DDD4
+          </div>
+          <div class="swatch" style="background: #2e4661; color: #f2efea">
+            <span class="label">Accent</span>#2E4661
+          </div>
+          <div class="swatch" style="background: #141b23; color: #f2efea">
+            <span class="label">Text</span>#141B23
+          </div>
+        </div>
+        <div class="meta">
+          <strong>7. Blue-hour</strong> — plays on "decaf at night", sleep-friendly.
+        </div>
+      </article>
+    </div>
+  </body>
+</html>

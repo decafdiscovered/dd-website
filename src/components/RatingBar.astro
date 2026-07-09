@@ -1,0 +1,30 @@
+---
+import { scoreToPercent } from '@utils/site';
+
+interface Props {
+  label: string;
+  score: number; // 1–10
+  hint?: string;
+}
+const { label, score, hint } = Astro.props;
+const pct = scoreToPercent(score);
+const scoreLabel = `${score.toFixed(1)} out of 10`;
+---
+
+<div class="w-full">
+  <div class="flex items-baseline justify-between text-sm">
+    <span class="font-medium text-[color:var(--color-espresso)]">{label}</span>
+    <span class="tabular-nums text-[color:var(--color-mocha-700)]" aria-hidden="true">{score.toFixed(1)} / 10</span>
+  </div>
+  <div
+    role="meter"
+    aria-label={`${label}: ${scoreLabel}`}
+    aria-valuemin="1"
+    aria-valuemax="10"
+    aria-valuenow={score}
+    class="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[color:var(--color-cream-200)]"
+  >
+    <div class="h-full rounded-full bg-[color:var(--color-mocha-500)]" style={`width:${pct}%`}></div>
+  </div>
+  {hint && <p class="mt-1 text-xs text-[color:var(--color-mocha-700)]">{hint}</p>}
+</div>

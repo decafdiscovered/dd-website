@@ -1,0 +1,178 @@
+@import 'tailwindcss';
+
+/* ---------- Design tokens ---------- */
+@theme {
+  /* Blue-hour palette. Neutrals stay warm off-white; accents are slate/navy blues.
+     Token names kept for backwards compatibility with existing components. */
+  --color-cream-50: #f2efea; /* page background */
+  --color-cream-100: #e9e4dc; /* surface / cards */
+  --color-cream-200: #d6d0c4; /* borders / dividers */
+  --color-mocha-100: #b9c3d0; /* softest slate */
+  --color-mocha-300: #7a8da6; /* mid slate */
+  --color-mocha-500: #4e6884; /* medium slate blue (eyebrows) */
+  --color-mocha-700: #2e4661; /* primary accent (buttons, links) */
+  --color-mocha-900: #1b2a3d; /* body text */
+  --color-espresso: #141b23; /* headings */
+  --color-crema: #8fa6bf; /* soft dusk blue (focus, selection) */
+  --color-leaf: #5b7a65; /* sage green — positive indicator */
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', 'Times New Roman', ui-serif, Georgia, serif;
+
+  --radius-card: 1rem;
+  --shadow-card: 0 1px 2px rgba(20, 27, 35, 0.06), 0 8px 24px -12px rgba(20, 27, 35, 0.18);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream-50);
+    color: var(--color-mocha-900);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-espresso);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  a {
+    color: var(--color-mocha-700);
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: var(--color-espresso);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-crema);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-crema);
+    color: var(--color-espresso);
+  }
+}
+
+/* ---------- Utilities ---------- */
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .prose-decaf {
+    max-width: 68ch;
+    font-size: 1.05rem;
+  }
+  .prose-decaf > * + * {
+    margin-top: 1em;
+  }
+  .prose-decaf h2 {
+    font-size: 1.6rem;
+    margin-top: 2em;
+  }
+  .prose-decaf h3 {
+    font-size: 1.25rem;
+    margin-top: 1.6em;
+  }
+  .prose-decaf ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+  .prose-decaf ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  .prose-decaf a {
+    text-decoration: underline;
+  }
+  .prose-decaf blockquote {
+    border-left: 4px solid var(--color-crema);
+    padding-left: 1rem;
+    color: var(--color-mocha-700);
+    font-style: italic;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    padding: 0.65rem 1.1rem;
+    border-radius: 9999px;
+    transition:
+      transform 150ms ease,
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-primary {
+    background: var(--color-mocha-700);
+    color: var(--color-cream-50);
+  }
+  .btn-primary:hover {
+    background: var(--color-espresso);
+    color: var(--color-cream-50);
+  }
+
+  .btn-secondary {
+    background: var(--color-cream-100);
+    color: var(--color-mocha-900);
+    border: 1px solid var(--color-mocha-100);
+  }
+  .btn-secondary:hover {
+    background: var(--color-cream-200);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--color-espresso);
+    color: var(--color-cream-50);
+    padding: 0.75rem 1rem;
+    border-radius: 0 0 0.5rem 0;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+}

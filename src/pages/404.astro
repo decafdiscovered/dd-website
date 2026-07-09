@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found" description="That page doesn't exist." noindex>
+  <div class="container-page py-24 max-w-2xl text-center">
+    <p class="text-xs uppercase tracking-[0.2em] font-semibold text-[color:var(--color-mocha-500)]">404</p>
+    <h1 class="mt-3 text-5xl font-bold">This mug is empty.</h1>
+    <p class="mt-4 text-[color:var(--color-mocha-700)]">
+      The page you were after doesn't exist. Try browsing the reviews instead.
+    </p>
+    <div class="mt-8 flex justify-center gap-3">
+      <a href="/" class="btn btn-secondary no-underline">Go home</a>
+      <a href="/reviews" class="btn btn-primary no-underline">Browse reviews</a>
+    </div>
+  </div>
+</BaseLayout>

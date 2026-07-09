@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import AffiliateDisclosure from '@components/AffiliateDisclosure.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="About Decaf Discovered — an honest, beginner-friendly log of decaf coffee reviews from a UK-based coffee drinker."
+>
+  <div class="container-page max-w-3xl py-16">
+    <SectionHeading eyebrow="The person behind the site" title="About Decaf Discovered" as="h1" />
+
+    <div class="prose-decaf">
+      <p>
+        Hi, I'm Sarah — an IT professional based in Scotland, and a fairly recent convert to taking
+        coffee seriously.
+      </p>
+      <p>
+        I was never really a "coffee person." For years my go-to was one of those heavily syruped
+        drinks from the big chain coffee shops. Then, towards the end of 2025, I noticed the
+        caffeine and sugar weren't agreeing with my sleep or my stomach anymore. Something had to
+        change.
+      </p>
+      <p>
+        So I switched to decaf instant from the supermarket. It did the job — my sleep sorted itself
+        out, my stomach settled down — but it was hardly exciting.
+      </p>
+      <p>
+        Then social media, in its all-knowing way, started serving me decaf coffee content and
+        pointed me towards <a href="https://craftdecaf.com" rel="noopener">craftdecaf.com</a>. I
+        ordered a bag on a whim, dusted off the cafetière that had been sitting in a cupboard,
+        and... wow. That one cup completely changed how I thought about coffee, decaf or otherwise.
+      </p>
+      <p>
+        A month or so later I bought a <a
+          href="https://amzn.to/4pjRgVS"
+          rel="sponsored noopener"
+          target="_blank">Breville Barista Slimline</a
+        > (that's a Sunbeam EMM5400BK machine, for anyone outside the UK), and my home coffee and latte
+        art journey properly began. That was June 2026, and I haven't looked back since.
+      </p>
+
+      <h2>What this blog is</h2>
+      <p>
+        This is me sharing that journey — the good coffees, the not-so-good ones, and everything I'm
+        learning about making it at home along the way. It's part review site, part personal
+        notebook to keep track of what's actually worth buying again.
+      </p>
+      <p>
+        I don't have the fanciest machine, my kit isn't from the big-name brands, and if you ask me
+        to find "blueberry" in a coffee, I'll probably just look at you blankly. What I <em>can</em>
+        tell you, honestly, is whether something's worth trying again. 😉
+      </p>
+
+      <h2>Honesty and links</h2>
+      <p>
+        I only write about coffees I've actually bought and brewed myself — no free samples, no
+        swaps for a good review. Where you see a "Buy coffee" link, it may be an affiliate link, but
+        the price you pay stays exactly the same either way.
+      </p>
+      <p>Thanks for stopping by — I hope you find your next favourite decaf here.</p>
+    </div>
+
+    <div class="mt-10">
+      <AffiliateDisclosure />
+    </div>
+  </div>
+</BaseLayout>
