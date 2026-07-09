@@ -6,6 +6,13 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches: [main]
+  # Nightly rebuild so scheduled content (any review/guide whose `publishedDate`
+  # is in the future) goes live automatically once its date has passed.
+  # 06:00 UTC ≈ 06:00 GMT / 07:00 BST — a quiet time before the morning coffee crowd.
+  schedule:
+    - cron: '0 6 * * *'
+  # Allow a manual "publish now" trigger from the Actions tab.
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,7 +21,7 @@ permissions:
 
 jobs:
   build_and_deploy:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
     runs-on: ubuntu-latest
     name: Build and deploy
     steps:

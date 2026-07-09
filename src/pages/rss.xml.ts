@@ -1,10 +1,13 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
-import { SITE } from '@utils/site';
+import { SITE, isPublished } from '@utils/site';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const reviews = await getCollection('reviews', ({ data }) => !data.draft);
+  const reviews = await getCollection(
+    'reviews',
+    ({ data }) => !data.draft && isPublished(data.publishedDate),
+  );
   return rss({
     title: `${SITE.name} — Reviews`,
     description: SITE.description,

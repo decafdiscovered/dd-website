@@ -5,10 +5,11 @@ import SectionHeading from '@components/SectionHeading.astro';
 import ReviewCard from '@components/ReviewCard.astro';
 import ReviewFilters from '@components/ReviewFilters.astro';
 import AffiliateDisclosure from '@components/AffiliateDisclosure.astro';
+import { isPublished } from '@utils/site';
 
-const reviews = (await getCollection('reviews', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime(),
-);
+const reviews = (
+  await getCollection('reviews', ({ data }) => !data.draft && isPublished(data.publishedDate))
+).sort((a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime());
 ---
 
 <BaseLayout

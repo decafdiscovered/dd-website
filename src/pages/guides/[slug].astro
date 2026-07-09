@@ -1,10 +1,13 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { formatDate } from '@utils/site';
+import { formatDate, isPublished } from '@utils/site';
 
 export async function getStaticPaths() {
-  const guides = await getCollection('guides', ({ data }) => !data.draft);
+  const guides = await getCollection(
+    'guides',
+    ({ data }) => !data.draft && isPublished(data.publishedDate),
+  );
   return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
 }
 

@@ -46,3 +46,16 @@ export function formatPrice(price?: number): string | null {
 export function scoreToPercent(score: number): number {
   return Math.max(0, Math.min(100, (score / 10) * 100));
 }
+
+/**
+ * Returns true if the given date is now-or-earlier — i.e. the entry is safe to
+ * publish. Used at build time so future-dated reviews/guides are excluded from
+ * the built site until a subsequent build runs on/after their `publishedDate`.
+ *
+ * Because the site is statically generated on Azure Static Web Apps, this is
+ * paired with a scheduled GitHub Actions rebuild so content goes live without
+ * a manual push.
+ */
+export function isPublished(publishedDate: Date, now: Date = new Date()): boolean {
+  return publishedDate.getTime() <= now.getTime();
+}
