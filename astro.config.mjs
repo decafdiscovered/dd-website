@@ -4,8 +4,9 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Update this to the final production URL before shipping.
-const SITE = process.env.SITE_URL ?? 'https://decafdiscovered.example';
+// Fall back to the production domain if SITE_URL isn't set at build time.
+// Override via the SITE_URL env var (see the GitHub Actions workflow).
+const SITE = process.env.SITE_URL ?? 'https://decafdiscovered.co.uk';
 
 export default defineConfig({
   site: SITE,

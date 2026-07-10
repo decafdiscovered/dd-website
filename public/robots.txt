@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap is generated at build time by @astrojs/sitemap
-Sitemap: https://decafdiscovered.example/sitemap-index.xml
+Sitemap: https://decafdiscovered.co.uk/sitemap-index.xml

@@ -11,7 +11,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: `${SITE.name} — Reviews`,
     description: SITE.description,
-    site: context.site ?? 'https://decafdiscovered.example',
+    site: context.site ?? 'https://decafdiscovered.co.uk',
     items: reviews
       .sort((a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime())
       .map((review) => ({

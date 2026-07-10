@@ -12,8 +12,8 @@ backend:
 media_folder: 'public/images/coffees'
 public_folder: '/images/coffees'
 
-site_url: https://decafdiscovered.example
-display_url: https://decafdiscovered.example
+site_url: https://decafdiscovered.co.uk
+display_url: https://decafdiscovered.co.uk
 locale: en
 
 collections:
