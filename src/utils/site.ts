@@ -9,6 +9,14 @@ export const SITE = {
   // Update this to your Buy Me a Coffee profile URL (e.g. 'https://buymeacoffee.com/your-handle').
   // Set to '' to hide the buttons entirely.
   buyMeACoffeeUrl: 'https://buymeacoffee.com/techielass',
+  // Beehiiv publication URL. Used as a fallback subscribe link and to point
+  // people at the archive of past issues. Set to '' to hide the fallback.
+  newsletterUrl: 'https://decafdiscovered.beehiiv.com/',
+  // Beehiiv "loader" embed form ID — the UUID from the `data-beehiiv-form`
+  // attribute on the script snippet in the beehiiv admin. When set, the
+  // on-site newsletter component renders the styled beehiiv form via their
+  // loader script. Set to '' to fall back to the button/POST form flow.
+  beehiivFormId: '8adedfc7-fe65-4202-9585-b43d364a144c',
   affiliateDisclosure:
     'Some links may be affiliate links. If you buy through these links I may earn a small commission at no extra cost to you.',
 } as const;

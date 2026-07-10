@@ -98,19 +98,21 @@ const countries = Array.from(new Set(roasters.map((r) => r.data.country))).sort(
 
           const inner = (
             <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0">
-                <p class="truncate text-base font-semibold text-[color:var(--color-espresso)]">
+              <div class="min-w-0 flex-1">
+                <p class="text-base leading-snug font-semibold text-[color:var(--color-espresso)]">
                   {roaster.data.name}
                 </p>
-                <p class="mt-0.5 truncate text-xs text-[color:var(--color-mocha-500)]">
+                <p class="mt-0.5 text-xs text-[color:var(--color-mocha-500)]">
                   {roaster.data.location}
                 </p>
-                <p
-                  class="mt-2 inline-flex items-center rounded-full bg-[color:var(--color-cream-100)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--color-mocha-700)]"
-                  aria-label={`${countLabel} reviewed`}
-                >
-                  {countLabel}
-                </p>
+                {count > 0 && (
+                  <p
+                    class="mt-2 inline-flex items-center rounded-full bg-[color:var(--color-cream-100)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--color-mocha-700)]"
+                    aria-label={`${countLabel} reviewed`}
+                  >
+                    {countLabel}
+                  </p>
+                )}
               </div>
               <CountryFlag
                 country={roaster.data.country}

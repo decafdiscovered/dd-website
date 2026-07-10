@@ -1,4 +1,6 @@
 ---
+import { SITE } from '@utils/site';
+
 interface Props {
   variant?: 'card' | 'inline';
   heading?: string;
@@ -11,9 +13,14 @@ const {
   subheading = 'A monthly round-up of new decaf reviews — plus a couple of things you won’t find on the site: what I’m brewing next, quick notes, and the odd honest disappointment.',
 } = Astro.props;
 
-// Beehiiv form action gets swapped in via env; harmless placeholder in dev.
-const action = import.meta.env.PUBLIC_BEEHIIV_FORM_ACTION ?? '#newsletter-not-configured';
-const isConfigured = action !== '#newsletter-not-configured';
+// Three embed modes, in order of preference:
+//   1. Beehiiv "loader" script — renders the styled beehiiv form inline.
+//   2. Legacy POST form — needs a `<form action>` URL from beehiiv's embed HTML.
+//   3. Fallback — a plain "Subscribe on Beehiiv" button pointing at the pub.
+const beehiivFormId = SITE.beehiivFormId;
+const legacyAction = import.meta.env.PUBLIC_BEEHIIV_FORM_ACTION ?? '';
+const isLegacyConfigured = legacyAction.length > 0;
+const beehiivUrl = SITE.newsletterUrl;
 ---
 
 <section
@@ -28,34 +35,66 @@ const isConfigured = action !== '#newsletter-not-configured';
     <h2 class="text-2xl font-bold">{heading}</h2>
     <p class="mt-2 text-[color:var(--color-mocha-700)]">{subheading}</p>
 
-    <form class="mt-6 flex flex-col gap-3 sm:flex-row" action={action} method="post" novalidate>
-      <label class="flex-1">
-        <span class="sr-only">Email address</span>
-        <input
-          type="email"
-          name="email"
-          required
-          autocomplete="email"
-          placeholder="you@example.com"
-          class="w-full rounded-full border border-[color:var(--color-mocha-100)] bg-white px-4 py-3 text-sm"
-        />
-      </label>
-      <button type="submit" class="btn btn-primary">Subscribe</button>
-    </form>
-
     {
-      !isConfigured && (
-        <p class="mt-3 text-xs text-[color:var(--color-mocha-500)]">
-          <strong>Demo mode:</strong> set{' '}
-          <code class="rounded bg-[color:var(--color-cream-200)] px-1">
-            PUBLIC_BEEHIIV_FORM_ACTION
-          </code>{' '}
-          to your Beehiiv embed URL to wire this up.
+      beehiivFormId ? (
+        // Beehiiv-hosted, beehiiv-styled form. Configure the look and copy
+        // inside beehiiv admin — this component can't restyle it from
+        // outside because the form is self-contained.
+        <div class="mt-6">
+          <script
+            is:inline
+            async
+            src="https://subscribe-forms.beehiiv.com/v3/loader.js"
+            data-beehiiv-form={beehiivFormId}
+          />
+          <noscript>
+            {beehiivUrl && (
+              <a href={beehiivUrl} rel="noopener" target="_blank" class="btn btn-primary">
+                Subscribe on Beehiiv →
+              </a>
+            )}
+          </noscript>
+        </div>
+      ) : isLegacyConfigured ? (
+        <form
+          class="mt-6 flex flex-col gap-3 sm:flex-row"
+          action={legacyAction}
+          method="post"
+          novalidate
+        >
+          <label class="flex-1">
+            <span class="sr-only">Email address</span>
+            <input
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+              class="w-full rounded-full border border-[color:var(--color-mocha-100)] bg-white px-4 py-3 text-sm"
+            />
+          </label>
+          <button type="submit" class="btn btn-primary">
+            Subscribe
+          </button>
+        </form>
+      ) : beehiivUrl ? (
+        <a
+          href={beehiivUrl}
+          rel="noopener"
+          target="_blank"
+          class="btn btn-primary mt-6 inline-flex items-center gap-2"
+        >
+          <span>Subscribe on Beehiiv</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      ) : (
+        <p class="mt-6 text-sm text-[color:var(--color-mocha-500)]">
+          Newsletter signup is not configured yet.
         </p>
       )
     }
 
-    <p class="mt-2 text-xs text-[color:var(--color-mocha-700)]">
+    <p class="mt-3 text-xs text-[color:var(--color-mocha-700)]">
       By subscribing you agree to receive occasional emails. Unsubscribe any time.
     </p>
   </div>

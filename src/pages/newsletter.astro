@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SectionHeading from '@components/SectionHeading.astro';
 import NewsletterSignup from '@components/NewsletterSignup.astro';
+import { SITE } from '@utils/site';
 ---
 
 <BaseLayout
@@ -54,39 +55,29 @@ import NewsletterSignup from '@components/NewsletterSignup.astro';
     </section>
 
     <section class="mt-16">
-      <h2 class="text-2xl font-bold">A peek at a recent issue</h2>
+      <h2 class="text-2xl font-bold">Read past issues</h2>
       <article
         class="mt-4 rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-100)] p-8"
       >
-        <p class="text-xs tracking-wider text-[color:var(--color-mocha-500)] uppercase">
-          Issue #12 · Sample
+        <p class="text-[color:var(--color-mocha-700)]">
+          Every issue lives on Beehiiv. Have a browse to see what the newsletter looks like before
+          you sign up — no email required to read.
         </p>
-        <h3 class="mt-2 text-xl font-semibold">Three new reviews and a bag I'm eyeing next</h3>
-        <div class="prose-decaf mt-3 text-[color:var(--color-mocha-700)]">
-          <p><strong>New on the site this month:</strong></p>
-          <ul>
-            <li>
-              <strong>Guatemalan Hunbatz</strong> — chocolatey and forgiving, works well in milk. → <em
-                >Read the full review</em
+        {
+          SITE.newsletterUrl && (
+            <p class="mt-5">
+              <a
+                href={SITE.newsletterUrl}
+                rel="noopener"
+                target="_blank"
+                class="btn btn-secondary inline-flex items-center gap-2"
               >
-            </li>
-            <li>
-              <strong>Brazilian Chocolate Decaf</strong> — the everyday espresso I keep coming back to.
-              → <em>Read the full review</em>
-            </li>
-            <li>
-              <strong>Colombian Swiss Water</strong> — a cleaner cup, best as filter. →
-              <em>Read the full review</em>
-            </li>
-          </ul>
-          <p>
-            <strong>Not on the site:</strong> I've had my eye on a naturally-processed decaf from a small
-            Yorkshire roaster for weeks. If it lives up to the hype, it'll be in next month's issue first.
-          </p>
-        </div>
-        <p class="mt-4 text-sm text-[color:var(--color-mocha-500)]">
-          Sample preview — the real newsletter will be sent by Beehiiv.
-        </p>
+                <span>Browse the archive on Beehiiv</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </p>
+          )
+        }
       </article>
     </section>
 
@@ -94,13 +85,26 @@ import NewsletterSignup from '@components/NewsletterSignup.astro';
       class="mt-16 rounded-[var(--radius-card)] bg-[color:var(--color-mocha-700)] p-10 text-center text-[color:var(--color-cream-50)]"
     >
       <h2 class="text-2xl font-bold">Ready when you are.</h2>
-      <p class="mt-2">Scroll back up to sign up — takes about three seconds.</p>
-      <a
-        href="#top"
-        class="mt-5 inline-block rounded-full bg-[color:var(--color-cream-50)] px-5 py-2 text-sm font-semibold text-[color:var(--color-espresso)] no-underline"
-      >
-        Back to signup
-      </a>
+      <p class="mt-2">Takes about three seconds.</p>
+      {
+        SITE.newsletterUrl ? (
+          <a
+            href={SITE.newsletterUrl}
+            rel="noopener"
+            target="_blank"
+            class="mt-5 inline-block rounded-full bg-[color:var(--color-cream-50)] px-5 py-2 text-sm font-semibold text-[color:var(--color-espresso)] no-underline"
+          >
+            Subscribe on Beehiiv →
+          </a>
+        ) : (
+          <a
+            href="#top"
+            class="mt-5 inline-block rounded-full bg-[color:var(--color-cream-50)] px-5 py-2 text-sm font-semibold text-[color:var(--color-espresso)] no-underline"
+          >
+            Back to signup
+          </a>
+        )
+      }
     </section>
   </div>
 </BaseLayout>
