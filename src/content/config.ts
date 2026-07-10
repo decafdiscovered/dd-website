@@ -63,7 +63,13 @@ const roasters = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/roasters' }),
   schema: z.object({
     name: z.string(),
+    // Free-text "City, Region" — e.g. "Strathaven, Scotland".
     location: z.string(),
+    // Country used for the country filter on the roasters index.
+    // Kept as a plain string so subdivisions like "Scotland" or "Wales" work.
+    country: z.string(),
+    // Emoji flag shown on each roaster tile, e.g. "🏴󠁧󠁢󠁳󠁣󠁴󠁿" or "🇬🇧".
+    flag: z.string().optional(),
     website: z.string().url().optional(),
     summary: z.string(),
     isSampleContent: z.boolean().default(false),

@@ -1,0 +1,48 @@
+---
+/**
+ * Render a country flag as inline SVG for the UK subdivisions
+ * (Scotland, England, Wales) that Windows renders badly as emoji,
+ * and as an emoji glyph everywhere else.
+ *
+ * Widths/heights are set via CSS on the wrapper span; the SVGs use
+ * `viewBox` and `preserveAspectRatio` so they scale cleanly.
+ */
+type Props = {
+  country: string;
+  /** Optional emoji fallback used when we don't have an SVG for the country. */
+  emoji?: string;
+  /** Wrapper class controls the visible size. Defaults to a small pill. */
+  class?: string;
+};
+
+const { country, emoji, class: className = 'inline-block h-6 w-9' } = Astro.props;
+
+const normalised = country.trim().toLowerCase();
+
+// SVG flags for the countries we know render badly as emoji on Windows.
+// Each SVG sets width/height to 100% so it fills whatever the wrapper span
+// sizes it to via utility classes. Wales is intentionally omitted for now —
+// the red dragon needs a proper vector asset and no Welsh roasters are in
+// the directory yet. Add it as an SVG file when the first one lands.
+const SVG_FLAGS: Record<string, string> = {
+  scotland: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect width="60" height="40" fill="#0065BD"/><path d="M0 0 L60 40 M60 0 L0 40" stroke="white" stroke-width="8"/></svg>`,
+  england: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect width="60" height="40" fill="white"/><rect x="24" width="12" height="40" fill="#CE1124"/><rect y="14" width="60" height="12" fill="#CE1124"/></svg>`,
+};
+
+const svg = SVG_FLAGS[normalised];
+---
+
+{
+  svg ? (
+    <span
+      class={`${className} overflow-hidden rounded-[3px] border border-[color:var(--color-cream-200)] leading-none shadow-sm`}
+      role="img"
+      aria-label={`Flag of ${country}`}
+      set:html={svg}
+    />
+  ) : emoji ? (
+    <span class="text-3xl leading-none" role="img" aria-label={`Flag of ${country}`}>
+      {emoji}
+    </span>
+  ) : null
+}

@@ -2,50 +2,120 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SectionHeading from '@components/SectionHeading.astro';
+import CountryFlag from '@components/CountryFlag.astro';
 
-const roasters = (await getCollection('roasters')).sort((a, b) =>
-  a.data.name.localeCompare(b.data.name),
+// Hide sample content from the public directory. Real roasters only.
+const roasters = (await getCollection('roasters', ({ data }) => !data.isSampleContent)).sort(
+  (a, b) => a.data.name.localeCompare(b.data.name),
+);
+
+// Unique country list for the filter dropdown, alphabetised.
+const countries = Array.from(new Set(roasters.map((r) => r.data.country))).sort((a, b) =>
+  a.localeCompare(b),
 );
 ---
 
 <BaseLayout
   title="Roasters"
-  description="A directory of the UK-friendly decaf roasters featured on Decaf Discovered."
+  description="A directory of the UK decaf roasters featured on Decaf Discovered. Filter by location or country."
 >
   <div class="container-page py-16">
     <SectionHeading
       eyebrow="Where the beans come from"
       title="Roasters"
-      description="A small directory of the roasters whose decafs have made it into the Diaries."
+      description="A small directory of the roasters whose decafs have made it into the Diaries. Search by name, town or country to find the ones nearest you."
       as="h1"
     />
 
-    <ul class="grid gap-6 md:grid-cols-2">
+    <form
+      id="roaster-filters"
+      class="mt-8 rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-5 shadow-[var(--shadow-card)]"
+      aria-label="Filter roasters"
+      data-roaster-filters
+    >
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="block text-sm">
+          <span class="font-semibold text-[color:var(--color-espresso)]">Search</span>
+          <input
+            type="search"
+            name="q"
+            placeholder="e.g. Glasgow, Fower, Scotland"
+            class="mt-1 w-full rounded-md border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-50)] px-3 py-2 text-sm"
+            data-text-input
+          />
+        </label>
+
+        <label class="block text-sm">
+          <span class="font-semibold text-[color:var(--color-espresso)]">Country</span>
+          <select
+            name="country"
+            class="mt-1 w-full rounded-md border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-50)] px-3 py-2 text-sm"
+            data-country-input
+          >
+            <option value="">All countries</option>
+            {countries.map((country) => <option value={country}>{country}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm text-[color:var(--color-mocha-700)]">
+          Showing <span data-visible-count>0</span> of <span data-total-count>0</span> roasters
+        </p>
+        <button type="reset" class="btn btn-secondary text-sm">Reset filters</button>
+      </div>
+    </form>
+
+    <p
+      class="mt-6 hidden rounded-md border border-dashed border-[color:var(--color-mocha-100)] bg-[color:var(--color-cream-50)] px-4 py-3 text-sm text-[color:var(--color-mocha-700)]"
+      data-no-roaster-results
+    >
+      No roasters match those filters yet. Try clearing the country or search box.
+    </p>
+
+    <ul class="mt-8 grid gap-6 md:grid-cols-2">
       {
-        roasters.map((roaster) => (
-          <li class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-6 shadow-[var(--shadow-card)]">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <h2 class="text-xl font-semibold">{roaster.data.name}</h2>
-                <p class="text-sm text-[color:var(--color-mocha-500)]">{roaster.data.location}</p>
+        roasters.map((roaster) => {
+          const search = [roaster.data.name, roaster.data.location, roaster.data.country]
+            .join(' ')
+            .toLowerCase();
+          return (
+            <li
+              class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-6 shadow-[var(--shadow-card)]"
+              data-roaster-card
+              data-country={roaster.data.country}
+              data-search={search}
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h2 class="text-xl font-semibold">{roaster.data.name}</h2>
+                  <p class="mt-1 text-sm text-[color:var(--color-mocha-500)]">
+                    {roaster.data.location}
+                  </p>
+                </div>
+                <CountryFlag
+                  country={roaster.data.country}
+                  emoji={roaster.data.flag}
+                  class="inline-block h-8 w-12 shrink-0"
+                />
               </div>
-              {roaster.data.isSampleContent && (
-                <span class="rounded-full bg-[color:var(--color-cream-200)] px-2 py-0.5 text-[10px] font-medium tracking-wider text-[color:var(--color-mocha-700)] uppercase">
-                  Sample
-                </span>
+              <p class="mt-3 text-sm text-[color:var(--color-mocha-700)]">{roaster.data.summary}</p>
+              {roaster.data.website && (
+                <p class="mt-4 text-sm">
+                  <a href={roaster.data.website} rel="noopener" target="_blank">
+                    Visit website →
+                  </a>
+                </p>
               )}
-            </div>
-            <p class="mt-3 text-sm text-[color:var(--color-mocha-700)]">{roaster.data.summary}</p>
-            {roaster.data.website && (
-              <p class="mt-4 text-sm">
-                <a href={roaster.data.website} rel="noopener" target="_blank">
-                  Visit website →
-                </a>
-              </p>
-            )}
-          </li>
-        ))
+            </li>
+          );
+        })
       }
     </ul>
   </div>
+
+  <script>
+    import { initRoasterFilters } from '@scripts/roasterFilters';
+    initRoasterFilters();
+  </script>
 </BaseLayout>
