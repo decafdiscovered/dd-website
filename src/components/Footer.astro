@@ -12,20 +12,6 @@ const year = new Date().getFullYear();
     <div>
       <p class="font-display text-lg font-bold text-[color:var(--color-espresso)]">{SITE.name}</p>
       <p class="mt-2 max-w-xs text-sm text-[color:var(--color-mocha-700)]">{SITE.description}</p>
-
-      {
-        SITE.buyMeACoffeeUrl && (
-          <a
-            href={SITE.buyMeACoffeeUrl}
-            rel="noopener"
-            target="_blank"
-            class="mt-5 inline-flex items-center gap-2 rounded-full bg-[color:var(--color-mocha-700)] px-4 py-2 text-sm font-semibold text-[color:var(--color-cream-50)] no-underline hover:bg-[color:var(--color-espresso)]"
-          >
-            <span aria-hidden="true">☕</span>
-            <span>Buy me a coffee</span>
-          </a>
-        )
-      }
     </div>
 
     <nav aria-label="Footer" class="text-sm">
