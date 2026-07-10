@@ -1,0 +1,102 @@
+---
+/**
+ * Renders the "wee picture" at the top of each roaster tile.
+ *
+ * If the roaster's markdown provides an optimised local `image`, that
+ * gets used. Otherwise we draw an inline SVG monogram — initials on a
+ * colour chosen deterministically from the roaster's name so the same
+ * roaster always looks the same.
+ *
+ * We intentionally never hotlink to a roaster's own site: the placeholder
+ * always works, needs no external HTTP fetch, and can't break if a
+ * roaster changes their CMS.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+type Props = {
+  name: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  /** Utility classes for the wrapper — controls aspect ratio and rounding. */
+  class?: string;
+};
+
+const { name, image, imageAlt, class: className = 'aspect-[16/6] w-full' } = Astro.props;
+
+// Drop the words that don't help identify a roaster so the initials read
+// naturally: "Dear Green" → DG, "Steampunk Coffee Roasters" → SC.
+const STOPWORDS = new Set([
+  'the',
+  'and',
+  'a',
+  'of',
+  'co',
+  'co.',
+  'coffee',
+  'roasters',
+  'roastery',
+  'ltd',
+]);
+
+const words = name
+  .split(/[\s&]+/)
+  .map((w) => w.replace(/[^\p{L}]/gu, ''))
+  .filter((w) => w.length > 0 && !STOPWORDS.has(w.toLowerCase()));
+
+const chosen = words.length > 0 ? words : name.split(/\s+/).filter(Boolean);
+const initials =
+  chosen
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? '')
+    .join('') ||
+  (name[0]?.toUpperCase() ?? '?');
+
+// Small on-brand palette. Deterministic pick by summing character codes
+// so a given name always maps to the same swatch.
+const PALETTE = [
+  '#3E2A1F', // deep espresso
+  '#6B4A34', // mocha
+  '#8C5A38', // walnut
+  '#B57943', // caramel
+  '#4E5E3E', // moss
+  '#5D4C6B', // muted plum
+];
+const hash = Array.from(name).reduce((n, ch) => n + ch.charCodeAt(0), 0);
+const bg = PALETTE[hash % PALETTE.length];
+---
+
+{
+  image ? (
+    <Image
+      src={image}
+      alt={imageAlt ?? name}
+      widths={[320, 640, 960]}
+      sizes="(min-width: 768px) 40vw, 100vw"
+      class={`${className} block object-cover`}
+    />
+  ) : (
+    <svg
+      class={`${className} block`}
+      viewBox="0 0 400 150"
+      preserveAspectRatio="xMidYMid slice"
+      role="img"
+      aria-label={`${name} logo placeholder`}
+    >
+      <rect width="400" height="150" fill={bg} />
+      <text
+        x="200"
+        y="75"
+        fill="#F5E6C8"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="72"
+        font-weight="700"
+        text-anchor="middle"
+        dominant-baseline="central"
+        letter-spacing="6"
+      >
+        {initials}
+      </text>
+    </svg>
+  )
+}
