@@ -11,7 +11,7 @@ import { SITE, formatDate, formatPrice, isPublished } from '@utils/site';
 export async function getStaticPaths() {
   const reviews = await getCollection(
     'reviews',
-    ({ data }) => !data.draft && isPublished(data.publishedDate),
+    ({ data }) => !data.draft && !data.isSampleContent && isPublished(data.publishedDate),
   );
   return reviews.map((review) => ({ params: { slug: review.id }, props: { review } }));
 }

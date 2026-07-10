@@ -6,7 +6,7 @@ import type { APIContext } from 'astro';
 export async function GET(context: APIContext) {
   const reviews = await getCollection(
     'reviews',
-    ({ data }) => !data.draft && isPublished(data.publishedDate),
+    ({ data }) => !data.draft && !data.isSampleContent && isPublished(data.publishedDate),
   );
   return rss({
     title: `${SITE.name} — Reviews`,

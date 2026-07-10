@@ -1,5 +1,5 @@
 ---
-name: 'Dear Green'
+name: 'Dear Green Coffee Roasters'
 location: 'Glasgow, Scotland'
 country: 'Scotland'
 flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿'

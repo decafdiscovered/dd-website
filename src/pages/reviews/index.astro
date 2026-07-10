@@ -8,7 +8,10 @@ import AffiliateDisclosure from '@components/AffiliateDisclosure.astro';
 import { isPublished } from '@utils/site';
 
 const reviews = (
-  await getCollection('reviews', ({ data }) => !data.draft && isPublished(data.publishedDate))
+  await getCollection(
+    'reviews',
+    ({ data }) => !data.draft && !data.isSampleContent && isPublished(data.publishedDate),
+  )
 ).sort((a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime());
 ---
 

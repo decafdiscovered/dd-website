@@ -5,7 +5,13 @@ import { glob } from 'astro/loaders';
  * Reusable enums — kept small on purpose. Everyday language only,
  * no cupping jargon. Expand as the site grows.
  */
-const decafMethod = z.enum(['Swiss Water', 'Sugar Cane / Ethyl Acetate', 'CO2', 'Unknown']);
+const decafMethod = z.enum([
+  'Swiss Water',
+  'Mountain Water',
+  'Sugar Cane / Ethyl Acetate',
+  'CO2',
+  'Unknown',
+]);
 const roastLevel = z.enum(['Light', 'Medium-light', 'Medium', 'Medium-dark', 'Dark']);
 const bestForOption = z.enum(['Espresso', 'Flat white', 'Filter', 'Cafetière', 'AeroPress']);
 
