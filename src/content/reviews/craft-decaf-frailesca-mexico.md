@@ -10,7 +10,7 @@ price: 12.95
 # weight: 250
 purchaseUrl: 'https://craftdecaf.com/collections/in-house-roast/products/popayan-colombia-decaf-copy'
 publishedDate: 2026-07-10
-draft: false
+draft: true
 tags: []
 bestFor: []
 ratings:
