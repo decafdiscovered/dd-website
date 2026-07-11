@@ -22,13 +22,15 @@ npm run preview -- --host
 
 ## Scripts
 
-| Command                     | What it does                                                   |
-| --------------------------- | -------------------------------------------------------------- |
-| `npm run dev`               | Local dev server with hot reload.                              |
-| `npm run build`             | Build the site **and** the Pagefind search index into `dist/`. |
-| `npm run preview -- --host` | Preview the built site locally (run `npm run build` first).    |
-| `npm run check`             | TypeScript + Astro content collection validation.              |
-| `npm run format`            | Prettier across the codebase.                                  |
+| Command                     | What it does                                                    |
+| --------------------------- | --------------------------------------------------------------- |
+| `npm run dev`               | Local dev server with hot reload.                               |
+| `npm run build`             | Build the site **and** the Pagefind search index into `dist/`.  |
+| `npm run indexnow`          | Submit built review/guide URLs in `dist/` to the IndexNow API.  |
+| `npm run publish:content`   | Build then submit review/guide URLs to IndexNow in one command. |
+| `npm run preview -- --host` | Preview the built site locally (run `npm run build` first).     |
+| `npm run check`             | TypeScript + Astro content collection validation.               |
+| `npm run format`            | Prettier across the codebase.                                   |
 
 ## Content
 
@@ -44,11 +46,13 @@ Prefer editing in a browser? Set the repo details in `public/admin/config.yml` a
 
 All optional. Set them as **GitHub Actions repository variables** (not secrets — they're public at runtime):
 
-| Variable                      | Purpose                                                                            |
-| ----------------------------- | ---------------------------------------------------------------------------------- |
-| `SITE_URL`                    | Canonical URL used for OG tags, sitemap, RSS.                                      |
-| `PUBLIC_AHREFS_ANALYTICS_KEY` | Ahrefs analytics site key. If unset, Ahrefs analytics is not loaded.               |
-| `PUBLIC_BEEHIIV_FORM_ACTION`  | Beehiiv embed URL for the newsletter form. If unset, the form runs in "demo mode". |
+| Variable                      | Purpose                                                                                |
+| ----------------------------- | -------------------------------------------------------------------------------------- |
+| `SITE_URL`                    | Canonical URL used for OG tags, sitemap, RSS.                                          |
+| `PUBLIC_AHREFS_ANALYTICS_KEY` | Ahrefs analytics site key. If unset, Ahrefs analytics is not loaded.                   |
+| `PUBLIC_BEEHIIV_FORM_ACTION`  | Beehiiv embed URL for the newsletter form. If unset, the form runs in "demo mode".     |
+| `INDEXNOW_KEY`                | Optional override for IndexNow key; otherwise read from `public/<key>.txt`.            |
+| `INDEXNOW_ENDPOINT`           | Optional IndexNow endpoint override (defaults to `https://api.indexnow.org/indexnow`). |
 
 The Azure deploy token belongs in **GitHub Secrets** as `AZURE_STATIC_WEB_APPS_API_TOKEN`.
 

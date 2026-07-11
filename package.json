@@ -8,6 +8,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && pagefind --site dist",
+    "indexnow": "node scripts/indexnow-submit.mjs",
+    "publish:content": "npm run build && npm run indexnow",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",

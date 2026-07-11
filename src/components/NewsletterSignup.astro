@@ -5,12 +5,14 @@ interface Props {
   variant?: 'card' | 'inline';
   heading?: string;
   subheading?: string;
+  showIntroCopy?: boolean;
 }
 
 const {
   variant = 'card',
   heading = 'The Decaf Discovered newsletter',
   subheading = 'A monthly round-up of new decaf reviews — plus a couple of things you won’t find on the site: what I’m brewing next, quick notes, and the odd honest disappointment.',
+  showIntroCopy = true,
 } = Astro.props;
 
 // Three embed modes, in order of preference:
@@ -32,15 +34,21 @@ const beehiivUrl = SITE.newsletterUrl;
   ]}
 >
   <div class="max-w-2xl">
-    <h2 class="text-2xl font-bold">{heading}</h2>
-    <p class="mt-2 text-[color:var(--color-mocha-700)]">{subheading}</p>
+    {
+      showIntroCopy && (
+        <>
+          <h2 class="text-2xl font-bold">{heading}</h2>
+          <p class="mt-2 text-[color:var(--color-mocha-700)]">{subheading}</p>
+        </>
+      )
+    }
 
     {
       beehiivFormId ? (
         // Beehiiv-hosted, beehiiv-styled form. Configure the look and copy
         // inside beehiiv admin — this component can't restyle it from
         // outside because the form is self-contained.
-        <div class="mt-6">
+        <div class={showIntroCopy ? 'mt-6' : ''}>
           <script
             is:inline
             async
@@ -57,7 +65,7 @@ const beehiivUrl = SITE.newsletterUrl;
         </div>
       ) : isLegacyConfigured ? (
         <form
-          class="mt-6 flex flex-col gap-3 sm:flex-row"
+          class:list={['flex flex-col gap-3 sm:flex-row', showIntroCopy && 'mt-6']}
           action={legacyAction}
           method="post"
           novalidate
@@ -82,7 +90,7 @@ const beehiivUrl = SITE.newsletterUrl;
           href={beehiivUrl}
           rel="noopener"
           target="_blank"
-          class="btn btn-primary mt-6 inline-flex items-center gap-2"
+          class:list={['btn btn-primary inline-flex items-center gap-2', showIntroCopy && 'mt-6']}
         >
           <span>Subscribe on Beehiiv</span>
           <span aria-hidden="true">→</span>
@@ -94,7 +102,9 @@ const beehiivUrl = SITE.newsletterUrl;
       )
     }
 
-    <p class="mt-3 text-xs text-[color:var(--color-mocha-700)]">
+    <p
+      class:list={['text-xs text-[color:var(--color-mocha-700)]', showIntroCopy ? 'mt-3' : 'mt-4']}
+    >
       By subscribing you agree to receive occasional emails. Unsubscribe any time.
     </p>
   </div>
