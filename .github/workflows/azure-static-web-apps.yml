@@ -1,17 +1,8 @@
 name: Azure Static Web Apps CI/CD
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches: [main]
-  # Nightly rebuild so scheduled content (any review/guide whose `publishedDate`
-  # is in the future) goes live automatically once its date has passed.
-  # 06:00 UTC ≈ 06:00 GMT / 07:00 BST — a quiet time before the morning coffee crowd.
-  schedule:
-    - cron: '0 6 * * *'
-  # Allow a manual "publish now" trigger from the Actions tab.
+  # Legacy workflow retained for reference only.
+  # Automatic triggers are disabled so it no longer runs in CI/CD.
   workflow_dispatch:
 
 permissions:
@@ -21,7 +12,7 @@ permissions:
 
 jobs:
   build_and_deploy:
-    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    if: false
     runs-on: ubuntu-latest
     name: Build and deploy
     steps:
@@ -62,7 +53,7 @@ jobs:
           skip_app_build: true
 
   close_pull_request:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: false
     runs-on: ubuntu-latest
     name: Close preview
     steps:
