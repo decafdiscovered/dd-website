@@ -28,8 +28,8 @@ const fullTitle = title === SITE.name ? title : `${title} · ${SITE.name}`;
 const canonicalUrl = new URL(canonical ?? Astro.url.pathname, Astro.site ?? Astro.url).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url).toString();
 
-// GA measurement ID is provided via env; nothing renders without it.
-const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+// Ahrefs analytics key; can be overridden via PUBLIC_AHREFS_ANALYTICS_KEY.
+const ahrefsAnalyticsKey = import.meta.env.PUBLIC_AHREFS_ANALYTICS_KEY ?? 'Y7nMOprJ7ayWRJZbaPTpfA';
 ---
 
 <meta charset="UTF-8" />
@@ -81,19 +81,7 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
 
 {
-  gaId && (
-    <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
-      <script
-        is:inline
-        define:vars={{ gaId }}
-        set:html={`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', gaId, { anonymize_ip: true });
-        `}
-      />
-    </>
+  ahrefsAnalyticsKey && (
+    <script async src="https://analytics.ahrefs.com/analytics.js" data-key={ahrefsAnalyticsKey} />
   )
 }

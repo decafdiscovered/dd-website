@@ -32,7 +32,7 @@ Optional. Add a local `.env` in the workspace root (it's already gitignored) if 
 
 ```
 SITE_URL=http://localhost:4321
-PUBLIC_GA_MEASUREMENT_ID=
+PUBLIC_AHREFS_ANALYTICS_KEY=
 PUBLIC_BEEHIIV_FORM_ACTION=
 ```
 

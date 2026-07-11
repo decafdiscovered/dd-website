@@ -44,11 +44,11 @@ Prefer editing in a browser? Set the repo details in `public/admin/config.yml` a
 
 All optional. Set them as **GitHub Actions repository variables** (not secrets — they're public at runtime):
 
-| Variable                     | Purpose                                                                            |
-| ---------------------------- | ---------------------------------------------------------------------------------- |
-| `SITE_URL`                   | Canonical URL used for OG tags, sitemap, RSS.                                      |
-| `PUBLIC_GA_MEASUREMENT_ID`   | Google Analytics 4 measurement ID. If unset, GA is not loaded.                     |
-| `PUBLIC_BEEHIIV_FORM_ACTION` | Beehiiv embed URL for the newsletter form. If unset, the form runs in "demo mode". |
+| Variable                      | Purpose                                                                            |
+| ----------------------------- | ---------------------------------------------------------------------------------- |
+| `SITE_URL`                    | Canonical URL used for OG tags, sitemap, RSS.                                      |
+| `PUBLIC_AHREFS_ANALYTICS_KEY` | Ahrefs analytics site key. If unset, Ahrefs analytics is not loaded.               |
+| `PUBLIC_BEEHIIV_FORM_ACTION`  | Beehiiv embed URL for the newsletter form. If unset, the form runs in "demo mode". |
 
 The Azure deploy token belongs in **GitHub Secrets** as `AZURE_STATIC_WEB_APPS_API_TOKEN`.
 

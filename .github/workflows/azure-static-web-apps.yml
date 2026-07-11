@@ -37,7 +37,6 @@ jobs:
       - name: Build site (includes Pagefind index)
         env:
           SITE_URL: ${{ vars.SITE_URL }}
-          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
           PUBLIC_BEEHIIV_FORM_ACTION: ${{ vars.PUBLIC_BEEHIIV_FORM_ACTION }}
         run: npm run build
 
