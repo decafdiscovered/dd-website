@@ -7,7 +7,7 @@ Opens the project in a reproducible Node 20 environment with the Astro, Tailwind
 - **VS Code**: `Ctrl+Shift+P` → **Dev Containers: Reopen in Container**.
 - **GitHub Codespaces**: click **Code → Create codespace on main**.
 
-First launch takes a few minutes while the image pulls and `npm install` runs. After that:
+First launch takes a few minutes while the image pulls and `npm ci` runs. After that:
 
 ```bash
 npm run dev
@@ -17,13 +17,14 @@ Astro will start on port `4321` and VS Code will forward and open it automatical
 
 ## What's inside
 
-| Piece | Why |
-|---|---|
-| `mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm` | Matches the Node 20 used in CI. |
-| GitHub CLI feature | `gh pr create` etc. from inside the container. |
-| Azure CLI feature | `az staticwebapp ...` for provisioning without leaving the container. |
-| Named `node_modules` volume | Keeps installs fast and off the host filesystem on Windows/macOS. |
-| Extensions | Astro, Tailwind IntelliSense, Prettier, ESLint, MDX, GitHub Actions, Azure SWA, GitLens. |
+| Piece                                                           | Why                                                                                      |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm` | Matches the Node 20 used in CI.                                                          |
+| GitHub CLI feature                                              | `gh pr create` etc. from inside the container.                                           |
+| Azure CLI feature                                               | `az staticwebapp ...` for provisioning without leaving the container.                    |
+| Named `node_modules` volume                                     | Keeps installs fast and off the host filesystem on Windows/macOS.                        |
+| Named npm cache volume                                          | Speeds up repeat `npm ci` and dependency refreshes.                                      |
+| Extensions                                                      | Astro, Tailwind IntelliSense, Prettier, ESLint, MDX, GitHub Actions, Azure SWA, GitLens. |
 
 ## Environment variables
 

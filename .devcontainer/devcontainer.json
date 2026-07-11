@@ -15,7 +15,7 @@
     }
   },
 
-  "postCreateCommand": "sudo chown -R node:node node_modules && npm install",
+  "postCreateCommand": "npm ci --prefer-offline --no-audit --fund=false",
   "postAttachCommand": {
     "welcome": "echo '☕ Decaf Discovered dev container ready. Run: npm run dev'"
   },
@@ -54,6 +54,7 @@
   },
 
   "mounts": [
-    "source=decaf-discovered-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+    "source=decaf-discovered-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=decaf-discovered-npm-cache,target=/home/node/.npm,type=volume"
   ]
 }

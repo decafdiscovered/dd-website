@@ -11,7 +11,8 @@ const SITE = process.env.SITE_URL ?? 'https://decafdiscovered.co.uk';
 export default defineConfig({
   site: SITE,
   trailingSlash: 'ignore',
-  prefetch: { prefetchAll: true, defaultStrategy: 'viewport' },
+  // Keep prefetch focused on likely next clicks instead of every link in view.
+  prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
