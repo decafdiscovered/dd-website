@@ -6,7 +6,7 @@
 
 backend:
   name: github
-  repo: your-github-user/decaf-discovered
+  repo: decafdiscovered/dd-website
   branch: main
 
 media_folder: 'public/images/coffees'
