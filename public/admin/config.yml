@@ -93,11 +93,12 @@ collections:
       - name: taste
         label: Taste experience
         widget: object
+        required: false
         fields:
-          - { name: sweetness, label: Sweetness, widget: string }
-          - { name: bitterness, label: Bitterness, widget: string }
-          - { name: acidity, label: Acidity, widget: string }
-          - { name: body, label: Body, widget: string }
+          - { name: sweetness, label: Sweetness, widget: string, required: false }
+          - { name: bitterness, label: Bitterness, widget: string, required: false }
+          - { name: acidity, label: Acidity, widget: string, required: false }
+          - { name: body, label: Body, widget: string, required: false }
       - { name: summary, label: Short summary, widget: text }
       - { name: myExperience, label: My experience, widget: markdown }
       - { name: bestBrewingMethod, label: Best brewing method, widget: string }

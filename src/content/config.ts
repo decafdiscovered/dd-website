@@ -52,7 +52,7 @@ const reviews = defineCollection({
       tags: z.array(z.string()).default([]),
       bestFor: z.array(bestForOption).default([]),
       ratings,
-      taste,
+      taste: taste.optional(),
       summary: z.string(),
       myExperience: z.string(),
       bestBrewingMethod: z.string(),
