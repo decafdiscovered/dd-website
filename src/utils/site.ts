@@ -6,9 +6,9 @@ export const SITE = {
   author: 'Decaf Discovered',
   locale: 'en-GB',
   twitter: '@decafdiscovered',
-  // Update this to your Buy Me a Coffee profile URL (e.g. 'https://buymeacoffee.com/your-handle').
+  // Update this to your tip-jar URL — Ko-fi, Buy Me a Coffee, PayPal, etc.
   // Set to '' to hide the buttons entirely.
-  buyMeACoffeeUrl: 'https://buymeacoffee.com/techielass',
+  buyMeACoffeeUrl: 'https://ko-fi.com/H4B0236Z7A',
   // Beehiiv publication URL. Used as a fallback subscribe link and to point
   // people at the archive of past issues. Set to '' to hide the fallback.
   newsletterUrl: 'https://decafdiscovered.beehiiv.com/',
