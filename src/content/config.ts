@@ -46,7 +46,10 @@ const reviews = defineCollection({
       price: z.number().nonnegative().optional(),
       weight: z.number().int().positive().optional(),
       purchaseUrl: z.string().url().optional(),
-      image: image().optional(),
+      // Public-folder path, e.g. '/images/coffees/my-review.jpg'. Kept as a
+      // string (rather than image()) so authors — and the Decap CMS — can
+      // drop files into public/images/coffees and reference them directly.
+      image: z.string().optional(),
       imageAlt: z.string().optional(),
       publishedDate: z.coerce.date(),
       tags: z.array(z.string()).default([]),
