@@ -4,9 +4,19 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Fall back to the production domain if SITE_URL isn't set at build time.
+// Fall back to the production domain if SITE_URL isn't set or is invalid.
 // Override via the SITE_URL env var (see the GitHub Actions workflow).
-const SITE = process.env.SITE_URL ?? 'https://decafdiscovered.co.uk';
+const DEFAULT_SITE = 'https://decafdiscovered.co.uk';
+const siteFromEnv = process.env.SITE_URL?.trim();
+
+let SITE = DEFAULT_SITE;
+if (siteFromEnv) {
+  try {
+    SITE = new URL(siteFromEnv).toString();
+  } catch {
+    console.warn(`[astro.config] Ignoring invalid SITE_URL: "${siteFromEnv}"`);
+  }
+}
 
 export default defineConfig({
   site: SITE,
