@@ -1,14 +1,11 @@
-# Decap CMS configuration (Git-backed, no server required).
-# When you're ready to enable editing:
-#   1. Set the correct `repo` and `branch` below.
-#   2. Choose a backend (github, gitlab, bitbucket or git-gateway).
-#   3. Follow https://decapcms.org/docs/ for auth setup.
+# Decap CMS configuration (Git-backed via Netlify Identity + Git Gateway).
+# Auth: log in with a Netlify Identity account (invite-only). Git Gateway
+# then commits to the GitHub repo on your behalf — no GitHub OAuth app
+# required. See https://decapcms.org/docs/git-gateway-backend/.
 
 backend:
-  name: github
-  repo: decafdiscovered/dd-website
+  name: git-gateway
   branch: main
-  base_url: https://decafdiscovered.netlify.app/
 
 media_folder: 'public/images/coffees'
 public_folder: '/images/coffees'

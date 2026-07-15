@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Content Manager · Decaf Discovered</title>
+    <!-- Netlify Identity widget (needed for the git-gateway backend). -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <!--
       Decap CMS (formerly Netlify CMS). Loaded from CDN so no build-time
-      dependency is required. Enable the Git backend of your choice when
-      you're ready (see /admin/config.yml).
+      dependency is required. Auth is handled by Netlify Identity + Git
+      Gateway — see /admin/config.yml.
     -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
