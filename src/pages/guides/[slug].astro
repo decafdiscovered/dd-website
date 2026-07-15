@@ -6,7 +6,7 @@ import { formatDate, isPublished } from '@utils/site';
 export async function getStaticPaths() {
   const guides = await getCollection(
     'guides',
-    ({ data }) => !data.draft && isPublished(data.publishedDate),
+    ({ data }) => !data.draft && !data.isSampleContent && isPublished(data.publishedDate),
   );
   return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
 }
