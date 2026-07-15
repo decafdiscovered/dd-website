@@ -1,0 +1,105 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+
+const formspreeEndpoint = 'https://formspree.io/f/mjgngydn';
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const submitted = Astro.url.searchParams.get('submitted') === 'true';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Decaf Discovered for feedback, suggestions, or collaborations."
+>
+  <div class="container-page max-w-3xl py-16">
+    <SectionHeading
+      eyebrow="Say hello"
+      title="Contact"
+      description="Questions, coffee suggestions, or a roaster you think I should try next? Drop me a message below."
+      as="h1"
+    />
+
+    {
+      submitted && (
+        <p
+          class="mb-6 rounded-[var(--radius-card)] border border-[color:var(--color-leaf)] bg-white p-4 text-sm text-[color:var(--color-espresso)]"
+          role="status"
+          aria-live="polite"
+        >
+          Thanks, your message has been sent.
+        </p>
+      )
+    }
+
+    {
+      !turnstileSiteKey && (
+        <p
+          class="mb-6 rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-4 text-sm text-[color:var(--color-mocha-700)]"
+          role="alert"
+        >
+          Contact form setup is incomplete: missing <strong>PUBLIC_TURNSTILE_SITE_KEY</strong>.
+        </p>
+      )
+    }
+
+    <form
+      id="contact-form"
+      class="rounded-[var(--radius-card)] border border-[color:var(--color-cream-200)] bg-white p-6 md:p-8"
+      action={formspreeEndpoint}
+      method="POST"
+    >
+      <input type="hidden" name="_subject" value="New contact form message from Decaf Discovered" />
+      <input type="hidden" name="_next" value="/contact?submitted=true#contact-form" />
+      <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+
+      <div class="grid gap-5">
+        <label class="grid gap-1.5">
+          <span class="text-sm font-semibold text-[color:var(--color-espresso)]">Name</span>
+          <input
+            type="text"
+            name="name"
+            required
+            autocomplete="name"
+            class="w-full rounded-lg border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-50)] px-3 py-2 text-[color:var(--color-espresso)]"
+          />
+        </label>
+
+        <label class="grid gap-1.5">
+          <span class="text-sm font-semibold text-[color:var(--color-espresso)]">Email</span>
+          <input
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            class="w-full rounded-lg border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-50)] px-3 py-2 text-[color:var(--color-espresso)]"
+          />
+        </label>
+
+        <label class="grid gap-1.5">
+          <span class="text-sm font-semibold text-[color:var(--color-espresso)]">Message</span>
+          <textarea
+            name="message"
+            required
+            rows="7"
+            class="w-full rounded-lg border border-[color:var(--color-cream-200)] bg-[color:var(--color-cream-50)] px-3 py-2 text-[color:var(--color-espresso)]"
+          ></textarea>
+        </label>
+      </div>
+
+      <div class="mt-6">
+        <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-6" disabled={!turnstileSiteKey}
+        >Send message</button
+      >
+
+      <p class="mt-3 text-xs text-[color:var(--color-mocha-700)]">
+        Protected by Cloudflare Turnstile. This site uses Formspree to process submissions.
+      </p>
+    </form>
+  </div>
+
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
+  ></script>
+</BaseLayout>
