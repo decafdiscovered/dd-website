@@ -41,5 +41,20 @@ const { title, description, image, type, publishedDate, canonical, structuredDat
     </main>
     <Footer />
     <BuyMeACoffeeFab />
+    <!--
+      Netlify Identity forwards password recovery / invite / email-confirmation
+      links to whichever domain the email template points at (by default the
+      .netlify.app subdomain). The Identity widget only loads on /admin, so if
+      we detect one of those hash tokens outside /admin we forward there,
+      preserving the hash. This is defensive — the CMS itself lives at /admin.
+    -->
+    <script is:inline>
+      (function () {
+        var hash = window.location.hash || '';
+        if (!/^#(recovery_token|invite_token|confirmation_token|email_change_token|access_token)=/.test(hash)) return;
+        if (window.location.pathname.replace(/\/+$/, '') === '/admin') return;
+        window.location.replace('/admin/' + hash);
+      })();
+    </script>
   </body>
 </html>

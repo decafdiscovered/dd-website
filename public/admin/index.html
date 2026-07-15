@@ -10,6 +10,19 @@
   </head>
   <body>
     <!--
+      The site lives on Azure Static Web Apps but Netlify Identity + Git
+      Gateway are provisioned on the .netlify.app mirror. Point the widget
+      at that Identity endpoint so login works cross-origin.
+    -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.init({
+          APIUrl: 'https://decafdiscovered.netlify.app/.netlify/identity',
+        });
+      }
+    </script>
+
+    <!--
       Decap CMS (formerly Netlify CMS). Loaded from CDN so no build-time
       dependency is required. Auth is handled by Netlify Identity + Git
       Gateway — see /admin/config.yml.

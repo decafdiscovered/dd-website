@@ -7,10 +7,14 @@
   },
   "routes": [
     {
+      "route": "/admin",
+      "redirect": "https://decafdiscovered.netlify.app/admin/",
+      "statusCode": 302
+    },
+    {
       "route": "/admin/*",
-      "headers": {
-        "cache-control": "no-cache"
-      }
+      "redirect": "https://decafdiscovered.netlify.app/admin/",
+      "statusCode": 302
     },
     {
       "route": "/pagefind/*",
