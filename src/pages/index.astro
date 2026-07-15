@@ -5,7 +5,7 @@ import SectionHeading from '@components/SectionHeading.astro';
 import ReviewCard from '@components/ReviewCard.astro';
 import NewsletterSignup from '@components/NewsletterSignup.astro';
 import AffiliateDisclosure from '@components/AffiliateDisclosure.astro';
-import { SITE, formatDate, isPublished } from '@utils/site';
+import { SITE, isPublished } from '@utils/site';
 
 const reviews = (
   await getCollection(
@@ -24,7 +24,6 @@ const latestReviews = reviews.slice(0, 3);
 const topRated = [...reviews]
   .sort((a, b) => b.data.ratings.overallScore - a.data.ratings.overallScore)
   .slice(0, 3);
-const recentlyAdded = reviews.slice(0, 4);
 const popularGuides = guides.slice(0, 3);
 ---
 
@@ -95,31 +94,6 @@ const popularGuides = guides.slice(0, 3);
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="top-rated">
         {topRated.map((review) => <ReviewCard review={review} />)}
       </div>
-    </section>
-
-    <!-- Recently added -->
-    <section aria-labelledby="recently-added">
-      <SectionHeading eyebrow="Just in" title="Recently added coffees" />
-      <ul class="grid gap-3 md:grid-cols-2" id="recently-added">
-        {
-          recentlyAdded.map((review) => (
-            <li class="flex items-center justify-between gap-4 rounded-lg border border-[color:var(--color-cream-200)] bg-white p-4">
-              <div>
-                <p class="text-xs text-[color:var(--color-mocha-500)]">
-                  {formatDate(review.data.publishedDate)}
-                </p>
-                <a href={`/reviews/${review.id}/`} class="font-medium no-underline">
-                  {review.data.coffeeName}
-                </a>
-                <p class="text-sm text-[color:var(--color-mocha-700)]">{review.data.roaster}</p>
-              </div>
-              <span class="rounded-full bg-[color:var(--color-mocha-700)] px-2.5 py-0.5 text-xs font-semibold text-[color:var(--color-cream-50)] tabular-nums">
-                {review.data.ratings.overallScore.toFixed(1)}
-              </span>
-            </li>
-          ))
-        }
-      </ul>
     </section>
 
     <!-- Popular guides -->
