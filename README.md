@@ -51,10 +51,17 @@ All optional. Set them as **GitHub Actions repository variables** (not secrets â
 | `SITE_URL`                    | Canonical URL used for OG tags, sitemap, RSS.                                          |
 | `PUBLIC_AHREFS_ANALYTICS_KEY` | Ahrefs analytics site key. If unset, Ahrefs analytics is not loaded.                   |
 | `PUBLIC_BEEHIIV_FORM_ACTION`  | Beehiiv embed URL for the newsletter form. If unset, the form runs in "demo mode".     |
+| `PUBLIC_TURNSTILE_SITE_KEY`   | Cloudflare Turnstile site key used by the contact form widget.                         |
 | `INDEXNOW_KEY`                | Optional override for IndexNow key; otherwise read from `public/<key>.txt`.            |
 | `INDEXNOW_ENDPOINT`           | Optional IndexNow endpoint override (defaults to `https://api.indexnow.org/indexnow`). |
 
 The Azure deploy token belongs in **GitHub Secrets** as `AZURE_STATIC_WEB_APPS_API_TOKEN`.
+
+### Contact form + Turnstile
+
+- The contact page posts to Formspree at `https://formspree.io/f/mjgngydn`.
+- Set `PUBLIC_TURNSTILE_SITE_KEY` in your GitHub Actions repository variables so Astro can render the widget.
+- Do **not** put your Turnstile secret in this repo. Store it in Formspree's Turnstile/CAPTCHA settings (or in a server-side secret store if you later verify tokens yourself).
 
 ## Deployment
 
