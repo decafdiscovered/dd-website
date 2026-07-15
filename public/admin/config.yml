@@ -8,6 +8,7 @@ backend:
   name: github
   repo: decafdiscovered/dd-website
   branch: main
+  base_url: https://decafdiscovered.netlify.app/
 
 media_folder: 'public/images/coffees'
 public_folder: '/images/coffees'
