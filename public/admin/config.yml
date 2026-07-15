@@ -32,7 +32,8 @@ collections:
           name: decaffeinationMethod,
           label: Decaffeination method,
           widget: select,
-          options: ['Swiss Water', 'Sugar Cane / Ethyl Acetate', 'CO2', 'Unknown'],
+          options:
+            ['Swiss Water', 'Mountain Water', 'Sugar Cane / Ethyl Acetate', 'CO2', 'Unknown'],
         }
       - {
           name: roastLevel,
@@ -44,6 +45,13 @@ collections:
       - { name: weight, label: Weight (grams), widget: number, required: false, value_type: int }
       - { name: purchaseUrl, label: Purchase URL, widget: string, required: false }
       - { name: image, label: Image, widget: image, required: false }
+      - {
+          name: imageAlt,
+          label: Image alt text,
+          widget: string,
+          required: false,
+          hint: 'Short description of the image for screen readers.',
+        }
       - { name: publishedDate, label: Published date, widget: datetime }
       - { name: tags, label: Tags, widget: list, default: [] }
       - {
@@ -106,6 +114,13 @@ collections:
       - { name: whoMightNotLikeThis, label: Who might not like this, widget: text }
       - { name: pros, label: Pros, widget: list, default: [] }
       - { name: cons, label: Cons, widget: list, default: [] }
+      - {
+          name: draft,
+          label: Draft (hide from site until unticked),
+          widget: boolean,
+          default: true,
+          required: false,
+        }
       - { name: body, label: Full write-up, widget: markdown, required: false }
 
   - name: roasters
@@ -113,10 +128,35 @@ collections:
     folder: src/content/roasters
     create: true
     slug: '{{slug}}'
+    identifier_field: name
     fields:
       - { name: name, label: Name, widget: string }
-      - { name: location, label: Location, widget: string }
-      - { name: website, label: Website, widget: string, required: false }
+      - {
+          name: location,
+          label: Location,
+          widget: string,
+          hint: 'City and region, e.g. "Edinburgh, Scotland".',
+        }
+      - {
+          name: country,
+          label: Country,
+          widget: string,
+          hint: 'Country or nation, e.g. "Scotland", "England", "Wales". Used for filters.',
+        }
+      - {
+          name: flag,
+          label: Flag emoji,
+          widget: string,
+          required: false,
+          hint: 'Optional emoji flag shown on the roaster tile, e.g. 🏴󠁧󠁢󠁳󠁣󠁴󠁿 or 🇬🇧.',
+        }
+      - {
+          name: website,
+          label: Website,
+          widget: string,
+          required: false,
+          hint: 'Full URL including https://',
+        }
       - { name: summary, label: Summary, widget: text }
       - { name: body, label: About, widget: markdown, required: false }
 
@@ -125,9 +165,17 @@ collections:
     folder: src/content/guides
     create: true
     slug: '{{slug}}'
+    identifier_field: title
     fields:
       - { name: title, label: Title, widget: string }
       - { name: summary, label: Summary, widget: text }
       - { name: publishedDate, label: Published date, widget: datetime }
       - { name: tags, label: Tags, widget: list, default: [] }
+      - {
+          name: draft,
+          label: Draft (hide from site until unticked),
+          widget: boolean,
+          default: true,
+          required: false,
+        }
       - { name: body, label: Body, widget: markdown }
