@@ -14,13 +14,23 @@ export async function getStaticPaths() {
 const { guide } = Astro.props;
 const { Content } = await render(guide);
 
+const authorUrl = new URL('/about', Astro.site ?? Astro.url).toString();
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: guide.data.title,
   description: guide.data.summary,
   datePublished: guide.data.publishedDate.toISOString(),
-  author: { '@type': 'Organization', name: 'Decaf Discovered' },
+  author: {
+    '@type': 'Person',
+    name: 'Sarah',
+    url: authorUrl,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Decaf Discovered',
+  },
 };
 ---
 
@@ -42,10 +52,10 @@ const structuredData = {
     </p>
     <h1 class="mt-2 text-4xl font-bold md:text-5xl">{guide.data.title}</h1>
     <p class="mt-3 text-sm text-[color:var(--color-mocha-700)]">
-      {formatDate(guide.data.publishedDate)}
+      Written by <a href="/about" rel="author" class="font-medium">Sarah</a>
+      <span aria-hidden="true"> · </span>
+      <span>{formatDate(guide.data.publishedDate)}</span>
     </p>
-
-    <p class="mt-6 text-lg text-[color:var(--color-mocha-700)]">{guide.data.summary}</p>
 
     {
       guide.data.isSampleContent && (
