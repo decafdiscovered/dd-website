@@ -106,6 +106,14 @@ collections:
       - { name: whoMightNotLikeThis, label: Who might not like this, widget: text }
       - { name: pros, label: Pros, widget: list, default: [] }
       - { name: cons, label: Cons, widget: list, default: [] }
+      - {
+          name: draft,
+          label: 'Draft (tick to hide from the live site)',
+          widget: boolean,
+          default: false,
+          required: false,
+        }
+      - { name: imageAlt, label: Image alt text, widget: string, required: false }
       - { name: body, label: Full write-up, widget: markdown, required: false }
 
   - name: roasters
@@ -113,11 +121,20 @@ collections:
     folder: src/content/roasters
     create: true
     slug: '{{slug}}'
+    identifier_field: name
     fields:
       - { name: name, label: Name, widget: string }
-      - { name: location, label: Location, widget: string }
+      - { name: location, label: 'Location (e.g. "Strathaven, Scotland")', widget: string }
+      - { name: country, label: Country, widget: string }
+      - {
+          name: flag,
+          label: 'Flag emoji (optional, e.g. 🏴󠁧󠁢󠁳󠁣󠁴󠁿 or 🇬🇧)',
+          widget: string,
+          required: false,
+        }
       - { name: website, label: Website, widget: string, required: false }
       - { name: summary, label: Summary, widget: text }
+      - { name: imageAlt, label: Image alt text, widget: string, required: false }
       - { name: body, label: About, widget: markdown, required: false }
 
   - name: guides
@@ -125,9 +142,17 @@ collections:
     folder: src/content/guides
     create: true
     slug: '{{slug}}'
+    identifier_field: title
     fields:
       - { name: title, label: Title, widget: string }
       - { name: summary, label: Summary, widget: text }
       - { name: publishedDate, label: Published date, widget: datetime }
       - { name: tags, label: Tags, widget: list, default: [] }
+      - {
+          name: draft,
+          label: 'Draft (tick to hide from the live site)',
+          widget: boolean,
+          default: false,
+          required: false,
+        }
       - { name: body, label: Body, widget: markdown }
