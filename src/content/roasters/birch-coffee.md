@@ -1,6 +1,6 @@
 ---
 name: Birch Coffee
-location: Isle of Sky, Scotland
+location: Isle of Skye, Scotland
 country: Scotland
 website: https://www.birch.coffee
 summary: Birch is a speciality coffee shop and eatery based in Portree on the
