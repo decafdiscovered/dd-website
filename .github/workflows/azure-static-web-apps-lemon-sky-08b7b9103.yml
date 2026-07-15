@@ -21,6 +21,11 @@ jobs:
           lfs: false
       - name: Build And Deploy
         id: builddeploy
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          PUBLIC_AHREFS_ANALYTICS_KEY: ${{ vars.PUBLIC_AHREFS_ANALYTICS_KEY }}
+          PUBLIC_BEEHIIV_FORM_ACTION: ${{ vars.PUBLIC_BEEHIIV_FORM_ACTION }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LEMON_SKY_08B7B9103 }}
