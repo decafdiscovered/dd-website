@@ -5,7 +5,10 @@ import SectionHeading from '@components/SectionHeading.astro';
 import { formatDate, isPublished } from '@utils/site';
 
 const guides = (
-  await getCollection('guides', ({ data }) => !data.draft && isPublished(data.publishedDate))
+  await getCollection(
+    'guides',
+    ({ data }) => !data.draft && !data.isSampleContent && isPublished(data.publishedDate),
+  )
 ).sort((a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime());
 ---
 
