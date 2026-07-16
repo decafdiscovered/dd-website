@@ -1,12 +1,29 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const SITE = process.env.SITE_URL ?? 'https://decafdiscovered.co.uk';
-const INDEXNOW_ENDPOINT = process.env.INDEXNOW_ENDPOINT ?? 'https://api.indexnow.org/indexnow';
-const DIST_DIR = process.env.INDEXNOW_DIST_DIR ?? 'dist';
-const PUBLIC_DIR = process.env.INDEXNOW_PUBLIC_DIR ?? 'public';
+// Treat empty / whitespace-only env vars as "unset". GitHub Actions passes
+// `vars.SITE_URL` through as an empty string when the repository variable is
+// missing, which would otherwise satisfy `??` and blow up in `new URL('')`.
+function envOr(name, fallback) {
+  const value = process.env[name];
+  if (value === undefined || value === null) return fallback;
+  const trimmed = value.trim();
+  return trimmed === '' ? fallback : trimmed;
+}
 
-const siteUrl = new URL(SITE);
+const SITE = envOr('SITE_URL', 'https://decafdiscovered.co.uk');
+const INDEXNOW_ENDPOINT = envOr('INDEXNOW_ENDPOINT', 'https://api.indexnow.org/indexnow');
+const DIST_DIR = envOr('INDEXNOW_DIST_DIR', 'dist');
+const PUBLIC_DIR = envOr('INDEXNOW_PUBLIC_DIR', 'public');
+
+let siteUrl;
+try {
+  siteUrl = new URL(SITE);
+} catch {
+  throw new Error(
+    `Invalid SITE_URL "${SITE}". Set the SITE_URL environment variable to an absolute URL, e.g. https://decafdiscovered.co.uk`,
+  );
+}
 
 function ensureSlash(url) {
   return url.endsWith('/') ? url : `${url}/`;
