@@ -1,6 +1,6 @@
 ---
 title: 'What Is Decaf Coffee? A Plain-English UK Guide'
-summary: "Decaf coffee is regular coffee with most of the caffeine removed. Here's how it's made, how it tastes, and whether it's worth trying — from a UK decaf drinker who was sceptical too."
+summary: 'What is decaf coffee? Learn how caffeine is removed, what decaf tastes like and how much caffeine remains, with clear advice for UK coffee drinkers.'
 publishedDate: 2026-07-15
 tags: ['Beginner', 'Basics', 'Methods']
 draft: false
