@@ -10,7 +10,7 @@ price: 10.00
 # weight in grams — check the bag and set 250 / 500 etc.
 # weight: 250
 purchaseUrl: 'https://www.fowercoffee.com/product/colombian-decaf'
-image: '/images/coffees/fower-colombian-decaf.jpeg'
+image: '/images/coffees/fower-colombian-decaf.jpg'
 imageAlt: 'Bag of Fower Coffee Colombian Decaf'
 publishedDate: 2026-07-14
 draft: true
