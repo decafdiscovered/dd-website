@@ -8,7 +8,7 @@ roastLevel: 'Medium'
 price: 13.40
 weight: 250
 purchaseUrl: 'https://www.thomsonscoffee.com/products/popayan-decaf'
-image: '/images/coffees/popayan-decaf-thomsons-coffee.jpeg'
+image: '/images/coffees/popayan-decaf-thomsons-coffee.jpg'
 imageAlt: "Bag of Thomson's Coffee Popayan Decaf"
 publishedDate: 2026-07-14
 draft: false
