@@ -93,7 +93,7 @@ const countries = Array.from(new Set(roasters.map((r) => r.data.country))).sort(
             .join(' ')
             .toLowerCase();
           const count = reviewCounts.get(roaster.data.name.trim().toLowerCase()) ?? 0;
-          const countLabel = count === 1 ? '1 coffee' : `${count} coffees`;
+          const countLabel = count === 1 ? '1 coffee reviewed' : `${count} coffees reviewed`;
           const href = roaster.data.website;
 
           const inner = (
@@ -108,7 +108,7 @@ const countries = Array.from(new Set(roasters.map((r) => r.data.country))).sort(
                 {count > 0 && (
                   <p
                     class="mt-2 inline-flex items-center rounded-full bg-[color:var(--color-cream-100)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--color-mocha-700)]"
-                    aria-label={`${countLabel} reviewed`}
+                    aria-label={countLabel}
                   >
                     {countLabel}
                   </p>
