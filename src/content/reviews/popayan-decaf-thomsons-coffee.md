@@ -13,10 +13,9 @@ imageAlt: "Bag of Thomson's Coffee Popayan Decaf"
 publishedDate: 2026-07-14
 draft: false
 tags: ['decaf', 'colombian', 'sugar-cane-decaf', 'espresso', 'milk-drinks']
-bestFor: ['Espresso', 'Flat white']
+bestFor: ['Latte', 'Flat white']
 ratings:
   overallScore: 9
-  espressoScore: 9
   milkDrinksScore: 9
   valueScore: 9
   wouldBuyAgain: true
@@ -44,7 +43,7 @@ myExperience: |
   rather than drink it on its own. I haven't enjoyed it neat, though that
   might say more about my barista skills (or lack of them) than the coffee
   itself.
-bestBrewingMethod: "Espresso — that's all I've tried it as so far, and honestly I haven't felt the need to try anything else yet."
+bestBrewingMethod: "Espresso machine — that's all I've tried it as so far, and honestly I haven't felt the need to try anything else yet."
 whoWouldLikeThis: "Anyone new to decaf who's worried it'll taste worse than regular coffee. This one doesn't feel like a compromise, and if you mostly drink milk-based coffees, the toffee sweetness comes through nicely."
 whoMightNotLikeThis: "If you like your coffee sharp and acidic, or you drink it black most of the time, this might feel a bit one-note — I've only had it with milk so far, so I can't speak to how it holds up on its own."
 pros:

@@ -59,7 +59,8 @@ collections:
           label: Best for,
           widget: select,
           multiple: true,
-          options: ['Espresso', 'Flat white', 'Filter', 'Cafetière', 'AeroPress'],
+          options:
+            ['Espresso', 'Flat white', 'Latte', 'Cortado', 'Filter', 'Cafetière', 'AeroPress'],
         }
       - name: ratings
         label: Ratings
@@ -77,6 +78,7 @@ collections:
               name: espressoScore,
               label: Espresso (1–10),
               widget: number,
+              required: false,
               min: 1,
               max: 10,
               value_type: float,
