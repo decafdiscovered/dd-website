@@ -12,7 +12,7 @@ weight: 250
 purchaseUrl: 'https://www.fowercoffee.com/product/colombian-decaf'
 image: '/images/coffees/fower-colombian-decaf.jpg'
 imageAlt: 'Bag of Fower Coffee Colombian Decaf'
-publishedDate: 2026-07-14
+publishedDate: 2026-07-23
 draft: false
 tags: ['decaf', 'colombian', 'espresso', 'milk-drinks', 'sugar-cane-decaf']
 bestFor: ['Latte', 'Flat white']
