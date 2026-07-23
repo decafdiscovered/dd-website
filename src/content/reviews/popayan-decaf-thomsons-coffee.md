@@ -13,7 +13,7 @@ imageAlt: "Bag of Thomson's Coffee Popayan Decaf"
 publishedDate: 2026-07-14
 draft: false
 tags: ['decaf', 'colombian', 'sugar-cane-decaf', 'espresso', 'milk-drinks']
-bestFor: ['Espresso', 'Flat white']
+bestFor: ['Latte', 'Flat white']
 ratings:
   overallScore: 9
   milkDrinksScore: 9

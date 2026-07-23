@@ -13,7 +13,15 @@ const decafMethod = z.enum([
   'Unknown',
 ]);
 const roastLevel = z.enum(['Light', 'Medium-light', 'Medium', 'Medium-dark', 'Dark']);
-const bestForOption = z.enum(['Espresso', 'Flat white', 'Filter', 'Cafetière', 'AeroPress']);
+const bestForOption = z.enum([
+  'Espresso',
+  'Flat white',
+  'Latte',
+  'Cortado',
+  'Filter',
+  'Cafetière',
+  'AeroPress',
+]);
 
 const ratings = z.object({
   overallScore: z.number().min(1).max(10),
