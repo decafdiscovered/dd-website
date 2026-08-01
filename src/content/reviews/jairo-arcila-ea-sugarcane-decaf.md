@@ -1,34 +1,66 @@
 ---
-coffeeName: 'Jairo Arcila EA Sugarcane Decaf'
-roaster: 'Rise & Grind Roastery'
-country: 'Colombia'
-origin: 'Quindío'
-decaffeinationMethod: 'Sugar Cane / Ethyl Acetate'
-# TODO confirm from the bag — the product page does not state a roast level.
-roastLevel: 'Medium'
-price: 15.00
+coffeeName: Jairo Arcila EA Sugarcane Decaf
+roaster: Rise & Grind Roastery
+country: Colombia
+origin: Quindío
+decaffeinationMethod: Sugar Cane / Ethyl Acetate
+roastLevel: Medium
+price: 15
 weight: 250
-purchaseUrl: 'https://www.riseandgrindroastery.co.uk/products/el-dragon-a-sugarcane-decaf-from-narino-pre-orders-only?variant=48031115116845'
-publishedDate: 2026-08-01
-draft: true
-tags: ['decaf', 'colombian', 'sugar-cane-decaf']
-bestFor: []
+purchaseUrl: https://www.riseandgrindroastery.co.uk/products/el-dragon-a-sugarcane-decaf-from-narino-pre-orders-only?variant=48031115116845
+publishedDate: 2026-08-01T10:52:00.000+01:00
+tags:
+  - decaf
+  - colombian
+  - sugar-cane-decaf
+bestFor:
+  - Espresso
+  - Flat white
+  - Latte
 ratings:
-  # TODO replace these placeholders after brewing. Scores must be between 1 and 10.
-  overallScore: 5
+  overallScore: 7
   wouldBuyAgain: false
+  espressoScore: 1
+  valueScore: 8
+  milkDrinksScore: 8
 taste:
-  sweetness: 'Cherry'
-  bitterness: 'Low to moderate'
-  acidity: 'Low'
-  body: 'TBD'
-summary: 'TBD — add a one-line verdict after trying this coffee.'
-myExperience: 'TBD — add honest notes after brewing this coffee.'
-bestBrewingMethod: 'TBD'
-whoWouldLikeThis: 'TBD'
-whoMightNotLikeThis: 'TBD'
-pros: []
-cons: []
+  sweetness: Cherry
+  bitterness: Low to moderate
+  acidity: Low
+  body: Light to medium
+summary: Might buy again — lovely for a treat, but the price makes me hesitate
+  to make it a regular.
+myExperience: >-
+  I've been brewing this on my Breville Barista Slimline using the pressurised
+  portafilter that came with the machine. Worth noting: I don't have a grinder
+  yet, so this was bought pre-ground rather than as beans.
+
+
+  It's a little pricier than the other coffees I've tried, so I went in with slightly higher expectations. Opening the bag, I got a real hit of cherry on the nose, much stronger than I expected. That fruitiness calms right down once it's in the cup, though, and gives way to a gentle chocolate flavour instead.
+
+
+  This is a smooth, easy-drinking coffee. No bitterness, nothing overpowering, just a pleasant, balanced cup with that subtle chocolate note coming through.
+
+
+  I drink both cow's milk and coconut milk, and it holds up well with either. With cow's milk, the coffee's flavour comes through nicely. With coconut milk, though, the coconut takes over a bit, and the coffee gets a little lost, so if you want to actually taste this one, I'd lean towards dairy or a milder plant milk.
+
+
+  I finished the cup happily and would make it again. It's the kind of coffee you can drink every day without it getting tiring; nothing shouty about it, just consistently pleasant.
+
+
+  It costs more than others I've bought, and while it's a genuinely nice cup, I'm not sure the price jump is fully justified compared to some of my cheaper go-tos. Good, but not dramatically better.
+bestBrewingMethod: Espresso machine — that's all I've tried it as so far, and
+  honestly I haven't felt the need to try anything else yet.
+whoWouldLikeThis: "This is a mild and easy drinking decaf coffee. "
+whoMightNotLikeThis: If you are looking for a strong flavour profile you probably won't enjoy it.
+pros:
+  - Smooth
+  - balanced
+  - and easy to drink every day with no bitterness to speak of.
+cons:
+  - It's pricier than your usual picks
+  - and the coconut milk drowns out the coffee's own flavour.
+draft: false
 ---
 
 <!--
