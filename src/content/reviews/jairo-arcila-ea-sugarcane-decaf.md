@@ -8,6 +8,8 @@ roastLevel: Medium
 price: 15
 weight: 250
 purchaseUrl: https://www.riseandgrindroastery.co.uk/products/el-dragon-a-sugarcane-decaf-from-narino-pre-orders-only?variant=48031115116845
+image: '/images/coffees/jairo-arcila-ea-sugarcane-decaf.jpg'
+imageAlt: "Bag of Rise and Grind's Jairo Arcila EA Sugarcane Decaf"
 publishedDate: 2026-08-01T10:52:00.000+01:00
 tags:
   - decaf
@@ -20,7 +22,6 @@ bestFor:
 ratings:
   overallScore: 7
   wouldBuyAgain: false
-  espressoScore: 1
   valueScore: 8
   milkDrinksScore: 8
 taste:
@@ -30,7 +31,7 @@ taste:
   body: Light to medium
 summary: Might buy again — lovely for a treat, but the price makes me hesitate
   to make it a regular.
-myExperience: >-
+myExperience: |
   I've been brewing this on my Breville Barista Slimline using the pressurised
   portafilter that came with the machine. Worth noting: I don't have a grinder
   yet, so this was bought pre-ground rather than as beans.
@@ -51,7 +52,7 @@ myExperience: >-
   It costs more than others I've bought, and while it's a genuinely nice cup, I'm not sure the price jump is fully justified compared to some of my cheaper go-tos. Good, but not dramatically better.
 bestBrewingMethod: Espresso machine — that's all I've tried it as so far, and
   honestly I haven't felt the need to try anything else yet.
-whoWouldLikeThis: "This is a mild and easy drinking decaf coffee. "
+whoWouldLikeThis: 'This is a mild and easy drinking decaf coffee. '
 whoMightNotLikeThis: If you are looking for a strong flavour profile you probably won't enjoy it.
 pros:
   - Smooth
@@ -80,21 +81,3 @@ The supplied URL retains an old "El Dragon" / Nariño slug, but its live product
 this coffee "Jairo Arcila – EA Sugarcane Decaf" from Quindío. The selected Shopify variant ID
 still matches the 250g wholebean option.
 -->
-
-## First impressions
-
-Add notes on the aroma from the bag and after grinding, then describe how easy it was to dial in.
-
-## In milk
-
-Try it as a latte, flat white or cortado. Note whether the fruit or chocolate comes through and
-whether it works differently with dairy and non-dairy milk.
-
-## Black
-
-Try it as espresso or filter and note its sweetness, bitterness, acidity and body in everyday
-language.
-
-## Would I buy it again?
-
-Add a short, honest verdict that supports the final score.

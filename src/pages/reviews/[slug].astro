@@ -21,6 +21,7 @@ const { data } = review;
 
 const price = formatPrice(data.price);
 const canonical = `/reviews/${review.id}/`;
+const experienceParagraphs = data.myExperience.trim().split(/\r?\n\s*\r?\n/);
 
 // JSON-LD Product + Review — helps search engines understand the page.
 const structuredData = {
@@ -113,7 +114,7 @@ const structuredData = {
 
         <section class="prose-decaf mt-10">
           <h2>My experience</h2>
-          <p>{data.myExperience}</p>
+          {experienceParagraphs.map((paragraph) => <p>{paragraph}</p>)}
           <Content />
         </section>
 
