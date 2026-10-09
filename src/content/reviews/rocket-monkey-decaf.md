@@ -14,40 +14,37 @@ image: '/images/coffees/rocket-monkey.jpg'
 imageAlt: 'Bag of Rocket Monkey decaf coffee in front of an espresso machine'
 publishedDate: 2026-10-08
 draft: false
-tags: ['decaf', 'rwandan', 'co2-decaf']
-bestFor: []
+tags: ['decaf', 'rwandan', 'co2-decaf', 'milk-drinks']
+bestFor: ['Latte', 'Flat white']
 ratings:
   # TODO replace this required-field placeholder with your score (1 to 10).
-  overallScore: 1
+  overallScore: 7
+  milkDrinksScore: 7
+  valueScore: 9
+  wouldBuyAgain: true
 taste:
-  sweetness: 'TBD'
-  bitterness: 'TBD'
-  acidity: 'TBD'
-  body: 'TBD'
-summary: 'TBD - a short summary of my experience with this coffee.'
-myExperience: 'TBD - how I brewed it, what I noticed and how it tasted.'
-bestBrewingMethod: 'TBD'
-whoWouldLikeThis: 'TBD'
-whoMightNotLikeThis: 'TBD'
-pros: []
-cons: []
+  sweetness: 'Low'
+  bitterness: 'Low'
+  acidity: 'Low'
+  body: 'Mellow'
+summary: 'This was a mellow coffee, smells really lovely, but there are no forward flavours while drinking it.'
+myExperience: |
+  This is a mellow, easy-drinking coffee. There aren’t any particularly bold or forward flavours, which makes it very approachable and easy to drink. It’s not the most memorable coffee I’ve tried, but I still really enjoyed it.
+
+  Sometimes you don’t want something complicated or full of strong flavours, and this works well when you just want a simple, enjoyable coffee. I’d happily buy it again for that reason.
+
+  I now have a grinder at home, so I’m grinding my beans fresh rather than using pre-ground coffee.
+
+  I only tried this coffee with cow’s milk, making both lattes and flat whites. It paired nicely with the milk and made for a smooth, uncomplicated drink.
+
+bestBrewingMethod: "Espresso machine — that's all I've tried it as so far, and honestly I haven't felt the need to try anything else yet."
+whoWouldLikeThis: 'Someone looking for a mellow, easy-drinking decaf without bold or overpowering flavours.'
+whoMightNotLikeThis: 'Someone looking for complex flavours or a coffee with a strong, distinctive character.'
+pros:
+  - 'Mellow and easy to drink'
+  - 'Works well with milk'
+  - 'A good choice when you want something simple'
+cons:
+  - 'Not particularly memorable'
+  - 'Lacks distinctive or forward flavours'
 ---
-
-## Product details to refer to
-
-Details from the roaster's product page, checked on 8 October 2026:
-
-- Origin: Kirehe, Eastern Rwanda.
-- Decaffeination: sparkling water CO2 process.
-- Roaster's tasting notes: rye bread, milk chocolate and caramel. These are not my own tasting notes.
-- Available sizes: 250g and 1kg.
-- Available as whole beans or ground for cafetiere, AeroPress or espresso.
-- Listed price: £8.70. Confirm the price paid for the 250g bag bought.
-
-## Before publishing
-
-- Replace the placeholder roast level and overall score.
-- Fill in my tasting notes, experience, verdict, pros and cons.
-- Confirm the price paid.
-- Choose bestFor options and any additional ratings after brewing.
-- Set publishedDate to the intended publication date and change draft to false only when ready.
