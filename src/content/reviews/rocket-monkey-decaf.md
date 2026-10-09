@@ -27,7 +27,7 @@ taste:
   bitterness: 'Low'
   acidity: 'Low'
   body: 'Mellow'
-summary: 'This was a mellow coffee, smells really lovely, but there are no forward flavours while drinking it.'
+summary: 'This was a mellow coffee that smelt lovely, but no distinctive flavours came through in the cup.'
 myExperience: |
   This is a mellow, easy-drinking coffee. There aren’t any particularly bold or forward flavours, which makes it very approachable and easy to drink. It’s not the most memorable coffee I’ve tried, but I still really enjoyed it.
 
